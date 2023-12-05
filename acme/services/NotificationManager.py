@@ -167,8 +167,9 @@ class NotificationManager(object):
 		L.isDebug and L.logDebug('Removing subscription')
 
 		# Send outstanding batchNotifications for a subscription
+		print("joaaaa")
 		self._flushBatchNotifications(subscription)
-
+		print("joaaaabbb")
 		# Send a deletion request to the subscriberURI
 		if (su := subscription.su):
 			if not self.sendDeletionNotification(su, subscription.ri):
@@ -177,13 +178,16 @@ class NotificationManager(object):
 		# Send a deletion request to the associatedCrossResourceSub
 		if (acrs := subscription.acrs):
 			self.sendDeletionNotification([ nu for nu in acrs ], subscription.ri)
-		
+		print("joaaaa")
 		# Finally remove subscriptions from storage
 		try:
 			if not CSE.storage.removeSubscription(subscription):
 				raise INTERNAL_SERVER_ERROR('cannot remove subscription from database')
-		except NOT_FOUND:
-			pass	# ignore, could be expected
+		# except NOT_FOUND:
+		# 	pass	# ignore, could be expected
+		except Exception as e:
+			print("Exception[****]")
+			print(e)
 
 
 	def updateSubscription(self, subscription:SUB, previousNus:list[str], originator:str) -> None:
@@ -1259,17 +1263,24 @@ class NotificationManager(object):
 		"""
 		# TODO doc
 		L.isDebug and L.logDebug(f'Flush batch notification')
-
+		
 		ri = subscription.ri
 		# Get the subscription information (not the <sub> resource itself!).
 		# Then get all the URIs/notification targets from that subscription. They might already
 		# be filtered.
-		if sub := CSE.storage.getSubscription(ri):
-			ln = sub['ln'] if 'ln' in sub else False
-			for nu in sub['nus']:
-				self._stopNotificationBatchWorker(ri, nu)						# Stop a potential worker for that particular batch
-				self._sendSubscriptionAggregatedBatchNotification(ri, nu, ln, sub)	# Send all remaining notifications
-
+		try:
+			if sub := CSE.storage.getSubscription(ri):
+				ln = sub['ln'] if 'ln' in sub else False
+				print("flushresult")
+				print(sub)
+				for nu in sub['nus']:
+					print(nu)
+					self._stopNotificationBatchWorker(ri, nu)					# Stop a potential worker for that particular batch
+					self._sendSubscriptionAggregatedBatchNotification(ri, nu, ln, sub)	# Send all remaining notifications
+		except Exception as e:
+			print(e)
+		print("done")
+		print("")
 
 	def _storeBatchNotification(self, nu:str, sub:JSON, notificationRequest:JSON) -> bool:
 		"""	Store a subscription's notification for later sending. For a single nu.
@@ -1318,6 +1329,7 @@ class NotificationManager(object):
 			Return:
 				Indication of the success of the sending.
 		"""
+		print("notification")
 		with self.lockBatchNotification:
 			L.isDebug and L.logDebug(f'Sending aggregated subscription notifications for ri: {ri}')
 

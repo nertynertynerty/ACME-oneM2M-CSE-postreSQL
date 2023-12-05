@@ -44,6 +44,9 @@ from ..resources.SCH import SCH
 from ..resources.Factory import resourceFromDict
 from ..services.Logging import Logging as L
 
+import psycopg2 as db
+import json
+
 
 # Constants for database and table names
 _resources = 'resources'
@@ -70,12 +73,12 @@ class Storage(object):
 	"""	This class implements the entry points to the CSE's underlying database functions.
 	"""
 
-	__slots__ = (
-		'inMemory',
-		'dbPath',
-		'dbReset',
-		'db',
-	)
+	# __slots__ = (
+	# 	'inMemory',
+	# 	'dbPath',
+	# 	'dbReset',
+	# 	'db',
+	# )
 	""" Define slots for instance variables. """
 
 	def __init__(self) -> None:
@@ -88,6 +91,19 @@ class Storage(object):
 		# create data directory
 		self._assignConfig()
 
+  
+		host = "localhost"
+		port = 5432
+		database = "test_db"
+		user = "postgres"
+		password = "root"
+
+		self.conn = db.connect(
+			host=host, port=port, database=database, user=user, password=password
+		)
+  
+		self.cur = self.conn.cursor()
+  
 		if not self.inMemory:
 			if self.dbPath:
 				L.isInfo and L.log('Using data directory: ' + self.dbPath)
@@ -96,7 +112,7 @@ class Storage(object):
 				raise RuntimeError(L.logErr('database.path not set'))
 
 		# create DB object and open DB
-		self.db = TinyDBBinding(self.dbPath, CSE.cseCsi[1:]) # add CSE CSI as postfix
+		self.db = TinyDBBinding(self.dbPath, CSE.cseCsi[1:], self.conn) # add CSE CSI as postfix
 		""" The database object. """
 
 		# Reset dbs?
@@ -518,6 +534,7 @@ class Storage(object):
 
 
 	def removeSubscription(self, subscription:Resource) -> bool:
+		print("****remove")
 		"""	Remove a subscription from the DB.
 
 			Args:
@@ -826,6 +843,304 @@ class Storage(object):
 		"""
 		return self.db.removeSchedule(schedule.ri)
 
+class Subscriptions(object):
+	def __init__(self,path:str,dbname:str):
+		self.conn = path
+		self.cur = path.cursor()
+		self.db2name = dbname
+		self.doc_id=1
+		self.cur.execute(
+			f"""
+			CREATE TABLE IF NOT EXISTS {self.db2name}  (
+				ID varchar(100) UNIQUE,
+				ri varchar(100),
+				pi varchar(100),
+				nct INT,
+				net INT[],
+				atr varchar(100)[],
+				chty INT[],
+				exc INT,
+				ln boolean,
+				nus varchar(100)[],
+				bn JSON,
+				cr varchar(100),
+				nec INT,
+				org varchar(100),
+				ma TIME,
+				nse boolean    
+			);
+			"""
+		)
+		self.conn.commit()
+   
+	#cond 추가 작업이 필요함
+	def get(self,cond=None,doc_id=None,doc_ids=None):
+		print(f"get data {cond}, {doc_id}, {doc_ids}")
+		sql = f"select row_to_json({self.db2name}) from {self.db2name} where "
+		if doc_id is not None:
+			sql+=f"id = '{doc_id}'"
+		elif doc_id is not None:
+			for i in doc_ids:
+				sql+=f"id = '{doc_id}' or "
+			sql = sql[:-3]
+			
+		elif cond is not None:
+			print("Need to Develop")
+		else:
+			print("error")
+			
+		try:
+			self.cur.execute(sql)
+			stats = self.cur.fetchall()
+			
+			tmps=[]
+			tmp={}
+			for i in stats:
+				for j,k in dict.items(i[0]):
+					tmp[j] = k
+				tmps.append(tmp)
+			stats = tmps
+		except db.DatabaseError as db_err:
+			stats = None
+			print(db_err)
+		except Exception as e:
+			print(e)
+			stats = None
+					
+		return stats
+			 
+	def rows(self) ->int:
+		sql = f"select count(*) from {self.db2name}"
+		try:
+			self.cur.execute(sql)
+			stats = self.cur.fetchall()
+			stats = stats[0][0]
+		except Exception as e:
+			stats = 0
+		return stats
+	
+	def columns(self,)-> list:
+		sql = f"SELECT column_name from information_schema.columns\
+				where table_name ='{self.db2name}'"
+		try:
+			self.cur.execute(sql)
+			stats = self.cur.fetchall()
+			stats = [i[0] for i in stats] # 좀더 잘 보이기 위해서 수정
+		except Exception as e:
+			stats = []
+		return stats
+	
+	def update(self,stats,cond =None, doc_ids:int = None):
+		print("update")
+		
+		try:
+			tmp = {"id":stats['ri']}
+		except:
+			tmp = {"id":self.doc_id}
+   
+		self.doc_id+=1
+		tmp.update(stats)
+		stats = tmp
+  
+		sql = f"UPDATE {self.db2name} SET "
+		try:
+			for i,j in dict.items(stats):
+				if j is None:
+					continue
+				elif isinstance(j,str):
+					j = f"'{j}'"
+				elif isinstance(j,list): 
+					j = f"ARRAY {j}" 
+				elif isinstance(j,dict):
+					j = json.dumps(j).replace("'",'"')
+					print(j)
+					j = f"'{j}'"
+				elif isinstance(j,int):
+					try:
+						j = int(j)
+					except:
+						j = j
+				else:
+					j = 1
+				sql+=f"{i} = {j}, "
+		except Exception as e:
+			print(e)
+		sql = sql[:-2]		
+		
+		sql +=f" where id='{doc_ids}'"
+		print(sql)
+		try:
+			self.cur.execute(sql)
+			stats = self.search({"id":f"{doc_ids}"}) ##수정
+		except Exception as e:
+			stats = []
+			print(e)
+   
+		#doc_id 삭제
+		return stats
+		
+	def insert(self,stats:JSON) -> int:
+		try:
+			tmp = {"id":stats['ri']}
+		except:
+			tmp = {"id":self.doc_id}
+		self.doc_id+=1
+		tmp.update(stats)
+		stats = tmp
+
+		sql = f"INSERT INTO {self.db2name} ("
+		for i,j in dict.items(stats):
+			if j is None: continue
+			sql+=f"{i}, "
+		sql = sql[:-2]
+		sql+=") VALUES ("
+
+		for i,j in dict.items(stats):
+			if j is None: continue
+			elif isinstance(j,str):
+				j = f"'{j}'"
+			elif isinstance(j,list): 
+				j = f"ARRAY {j}" 
+			elif isinstance(j,dict):
+				j = json.dumps(j).replace("'",'"')
+				print(j)
+				j = f"'{j}'"
+			elif isinstance(j,int):
+				try:
+					j = int(j)
+				except:
+					j = 1
+			else:
+				print(f"error->{j}")
+				j = 1
+			
+			sql+=f"{j}, "
+		sql = sql[:-2]
+		sql+=")"
+		print(sql)
+		try:
+			self.cur.execute(sql)
+			self.conn.commit()
+		except db.DatabaseError as db_err:
+			print("error")
+			print(db_err)
+		stats = stats['id']
+		return stats
+	
+	def truncate(self)->None:
+		print("truncate")
+		"""
+		Truncate the table by removing all documents.
+		"""
+		# 다 없애는 것이라 하여 다 없애봄
+		sql = f'drop table {self.db2name}'
+		
+		try:
+			self.cur.execute(sql)
+			self.conn.commit()
+		except :
+			print("error")
+	
+	def search(self, keyword:JSON)-> List[Document]:
+		print("search")
+		sql = f"SELECT row_to_json({self.db2name}) from {self.db2name} where "
+		for i,j in dict.items(keyword):
+			sql+= f"{i}='{j}' and "
+		sql = sql[:-4]
+		print(sql)
+		try:
+			self.cur.execute(sql)
+			stats = self.cur.fetchall()
+			
+			tmps=[]
+			tmp={}
+			for i in stats:
+				for j,k in dict.items(i[0]):
+					tmp[j] = k
+				tmps.append(tmp)
+			stats = tmps
+			
+		except db.DatabaseError as err:
+			print("error")
+			print(err)
+		except Exception as e:
+			print("just error")
+			print(e)
+		print(f"search_result:{stats}")
+		return stats
+	  
+	def all(self):
+		sql =f"select row_to_json({self.db2name}) from {self.db2name}"
+		try:
+			self.cur.execute(sql)
+			stats = self.cur.fetchall()
+		
+			tmps=[]
+			tmp={}
+			for i in stats:
+				for j,k in dict.items(i[0]):
+					tmp[j] = k
+				tmps.append(tmp)
+			stats = tmps
+		
+		except Exception as e:
+			stats = []
+		return stats
+ 
+	def upsert(self,stats,cond=None)->list:
+		print("data")
+		
+		print(stats)
+		try:
+			doc_id = stats['id']
+		except:
+			doc_id = stats['ri']
+   
+		try:
+			ret = self.update(stats=stats,doc_ids=doc_id)
+		except Exception as e:
+			ret = None
+			print("the result")
+			print(e)
+			print("update insert is update")
+   
+
+		print("result")
+		print(ret)	
+		if ret:
+			return ret
+		print("next")
+		
+		
+		return self.insert(stats)
+
+	def remove(self,cond = None,doc_ids:int=None)->list:
+		print("[*****]remove")
+		if doc_ids is not None:
+			removed_ids = list(doc_ids)
+			
+			sql = f'delete from {self.db2name} where '
+			for doc_id in removed_ids:
+				sql+= f"id = '{doc_id}' and "
+			sql = sql[:-4]
+
+			try:
+				self.cur.execute(sql)
+				self.conn.commit()
+			except Exception as e:
+				print(e)
+				print("error subscription")
+				removed_ids = []
+
+			return removed_ids
+		
+		if cond is not None:
+			removed_ids = []
+			return []
+			
+		raise print("error from subscription error")
+
+
 #########################################################################
 #
 #	DB class that implements the TinyDB binding
@@ -837,63 +1152,63 @@ class TinyDBBinding(object):
 	"""	This class implements the TinyDB binding to the database. It is used by the Storage class.
 	"""
 
-	__slots__ = (
-		'path',
-		'cacheSize',
-		'writeDelay',
-		'maxRequests',
+	# __slots__ = (
+	# 	'path',
+	# 	'cacheSize',
+	# 	'writeDelay',
+	# 	'maxRequests',
 		
-		'lockResources',
-		'lockIdentifiers',
-		'lockChildResources',
-		'lockStructuredIDs',
-		'lockSubscriptions',
-		'lockBatchNotifications',
-		'lockStatistics',
-		'lockActions',
-		'lockRequests',
-		'lockSchedules',
+	# 	'lockResources',
+	# 	'lockIdentifiers',
+	# 	'lockChildResources',
+	# 	'lockStructuredIDs',
+	# 	'lockSubscriptions',
+	# 	'lockBatchNotifications',
+	# 	'lockStatistics',
+	# 	'lockActions',
+	# 	'lockRequests',
+	# 	'lockSchedules',
 
-		'fileResources',
-		'fileIdentifiers',
-		'fileSubscriptions',
-		'fileBatchNotifications',
-		'fileStatistics',
-		'fileActions',
-		'fileRequests',
-		'fileSchedules',
+	# 	'fileResources',
+	# 	'fileIdentifiers',
+	# 	'fileSubscriptions',
+	# 	'fileBatchNotifications',
+	# 	'fileStatistics',
+	# 	'fileActions',
+	# 	'fileRequests',
+	# 	'fileSchedules',
 		
-		'dbResources',
-		'dbIdentifiers', 		
-		'dbSubscriptions', 	
-		'dbBatchNotifications',
-		'dbStatistics',
-		'dbActions',	
-		'dbRequests',	
-		'dbSchedules',	
+	# 	'dbResources',
+	# 	'dbIdentifiers', 		
+	# 	'dbSubscriptions', 	
+	# 	'dbBatchNotifications',
+	# 	'dbStatistics',
+	# 	'dbActions',	
+	# 	'dbRequests',	
+	# 	'dbSchedules',	
 
-		'tabResources',
-		'tabIdentifiers',
-		'tabChildResources',
-		'tabStructuredIDs',
-		'tabSubscriptions',
-		'tabBatchNotifications',
-		'tabStatistics',
-		'tabActions',
-		'tabRequests',
-		'tabSchedules',
+	# 	'tabResources',
+	# 	'tabIdentifiers',
+	# 	'tabChildResources',
+	# 	'tabStructuredIDs',
+	# 	'tabSubscriptions',
+	# 	'tabBatchNotifications',
+	# 	'tabStatistics',
+	# 	'tabActions',
+	# 	'tabRequests',
+	# 	'tabSchedules',
 
-		'resourceQuery',
-		'identifierQuery',
-		'subscriptionQuery',
-		'batchNotificationQuery',
-		'actionsQuery',
-		'requestsQuery',
-		'schedulesQuery',
-	)
+	# 	'resourceQuery',
+	# 	'identifierQuery',
+	# 	'subscriptionQuery',
+	# 	'batchNotificationQuery',
+	# 	'actionsQuery',
+	# 	'requestsQuery',
+	# 	'schedulesQuery',
+	# )
 	""" Define slots for instance variables. """
 
-	def __init__(self, path:str, postfix:str) -> None:
+	def __init__(self, path:str, postfix:str,conn) -> None:
 		"""	Initialize the TinyDB binding.
 		
 			Args:
@@ -901,12 +1216,15 @@ class TinyDBBinding(object):
 				postfix: Postfix for the database file names.
 		"""
 		
-		self.path = path
+		
 		""" Path to the database directory. """
 		self._assignConfig()
+
+		self.conn = conn
 		""" Assign configuration values. """
 		L.isInfo and L.log(f'Cache Size: {self.cacheSize:d}')
 
+		self.path = path
 		# create transaction locks
 		self.lockResources				= Lock()
 		""" Lock for the resources table."""
@@ -954,7 +1272,7 @@ class TinyDBBinding(object):
 			""" The TinyDB database for the resources table."""
 			self.dbIdentifiers 			= TinyDB(storage = MemoryStorage)
 			""" The TinyDB database for the identifiers table."""
-			self.dbSubscriptions 		= TinyDB(storage = MemoryStorage)
+			self.db2Subscriptions 		= "subscriptions"
 			""" The TinyDB database for the subscriptions table."""
 			self.dbBatchNotifications	= TinyDB(storage = MemoryStorage)
 			""" The TinyDB database for the batchNotifications table."""
@@ -972,7 +1290,7 @@ class TinyDBBinding(object):
 			""" The TinyDB database for the resources table."""
 			self.dbIdentifiers 			= TinyDB(self.fileIdentifiers, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the identifiers table."""
-			self.dbSubscriptions 		= TinyDB(self.fileSubscriptions, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
+			self.db2Subscriptions 		= "subscriptions"
 			""" The TinyDB database for the subscriptions table."""
 			self.dbBatchNotifications 	= TinyDB(self.fileBatchNotifications, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the batchNotifications table."""
@@ -1003,9 +1321,9 @@ class TinyDBBinding(object):
 		""" The TinyDB table for the structuredIDs table."""
 		TinyDBBetterTable.assign(self.tabStructuredIDs)
 		
-		self.tabSubscriptions = self.dbSubscriptions.table(_subscriptions, cache_size = self.cacheSize)
+		self.tabSubscriptions = Subscriptions(conn,self.db2Subscriptions)
 		""" The TinyDB table for the subscriptions table."""
-		TinyDBBetterTable.assign(self.tabSubscriptions)
+		# TinyDBBetterTable.assign(self.tabSubscriptions)
 		
 		self.tabBatchNotifications = self.dbBatchNotifications.table(_batchNotifications, cache_size = self.cacheSize)
 		""" The TinyDB table for the batchNotifications table."""
@@ -1455,13 +1773,21 @@ class TinyDBBinding(object):
 			Return:
 				A list of found subscription representations, or None.
 		"""
-		with self.lockSubscriptions:
-			if ri:
-				_r:Document = self.tabSubscriptions.get(doc_id =  ri)	# type:ignore[arg-type, assignment]
-				return [_r] if _r else []
-			if pi:
-				return self.tabSubscriptions.search(self.subscriptionQuery.pi == pi)
-			return None
+		# with self.lockSubscriptions:
+		if ri:
+			print(f"**get{ri}")
+			_r:Document = self.tabSubscriptions.get(doc_id =  ri)	# type:ignore[arg-type, assignment]
+			ret = [_r] if _r else []
+			print(f"result: {ret}")
+			return ret
+		if pi:
+			# print(self.subscriptionQuery.pi == pi)
+			ret = self.tabSubscriptions.search({'pi': pi})
+			print("pi--result")
+			print(ret)
+			return ret
+			# return self.tabSubscriptions.search(self.subscriptionQuery.pi == pi)
+		return None
 
 
 	def upsertSubscription(self, subscription:Resource) -> bool:
@@ -1473,29 +1799,35 @@ class TinyDBBinding(object):
 			Return:
 				True if the subscription representation was updated or inserted, False otherwise.
 		"""
-		with self.lockSubscriptions:
-			ri = subscription.ri
-			return self.tabSubscriptions.upsert(
-				Document({'ri'  	: ri, 
-						  'pi'  	: subscription.pi,
-						  'nct' 	: subscription.nct,
-						  'net' 	: subscription['enc/net'],	# TODO perhaps store enc as a whole?
-						  'atr' 	: subscription['enc/atr'],
-						  'chty'	: subscription['enc/chty'],
-						  'exc' 	: subscription.exc,
-						  'ln'  	: subscription.ln,
-						  'nus' 	: subscription.nu,
-						  'bn'  	: subscription.bn,
-						  'cr'  	: subscription.cr,
-						  'nec'  	: subscription.nec,
-						  'org'		: subscription.getOriginator(),
-						  'ma' 		: fromDuration(subscription.ma) if subscription.ma else None, # EXPERIMENTAL ma = maxAge
-						  'nse' 	: subscription.nse
-						 }, ri)) is not None
+		# with self.lockSubscriptions:
+		ri = subscription.ri
+		try:
+			target = {
+				'ri'  	: ri, 
+				'pi'  	: subscription.pi,
+				'nct' 	: subscription.nct,
+				'net' 	: subscription['enc/net'],	# TODO perhaps store enc as a whole?
+				'atr' 	: subscription['enc/atr'],
+				'chty'	: subscription['enc/chty'],
+				'exc' 	: subscription.exc,
+				'ln'  	: subscription.ln,
+				'nus' 	: subscription.nu,
+				'bn'  	: subscription.bn,
+				'cr'  	: subscription.cr,
+				'nec'  	: subscription.nec,
+				'org'		: subscription.getOriginator(),
+				'ma' 		: fromDuration(subscription.ma) if subscription.ma else None, # EXPERIMENTAL ma = maxAge
+				'nse' 	: subscription.nse
+				}
+		except Exception as e:
+			print("The wrong data"+e)
+			target = {'ri': ri}
+		return self.tabSubscriptions.upsert(stats=target) is not None
 					# self.subscriptionQuery.ri == ri) is not None
 
 
 	def removeSubscription(self, subscription:Resource) -> bool:
+		print("hihihihi remove")
 		"""	Remove a subscription representation from the database.
 
 			Args:
@@ -1504,9 +1836,9 @@ class TinyDBBinding(object):
 			Return:
 				True if the subscription representation was removed, False otherwise.
 		"""
-		with self.lockSubscriptions:
-			return len(self.tabSubscriptions.remove(doc_ids = [subscription.ri])) > 0
-			# return len(self.tabSubscriptions.remove(self.subscriptionQuery.ri == _ri)) > 0
+		# with self.lockSubscriptions:
+		return len(self.tabSubscriptions.remove(doc_ids = [subscription.ri])) > 0
+		# return len(self.tabSubscriptions.remove(self.subscriptionQuery.ri == _ri)) > 0
 
 
 	#

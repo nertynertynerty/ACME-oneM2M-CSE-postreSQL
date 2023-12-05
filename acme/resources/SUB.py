@@ -127,6 +127,7 @@ class SUB(Resource):
 
 
 	def deactivate(self, originator:str) -> None:
+		print("deactivate")
 		super().deactivate(originator)
 		CSE.notification.removeSubscription(self, originator)
 

@@ -1613,7 +1613,6 @@ class TinyDBBinding(object):
             self.conn.commit()
         return self.cursor.rowcount > 0
 
-
     #
     #	Statistics
     #

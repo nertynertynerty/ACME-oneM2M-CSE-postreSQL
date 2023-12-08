@@ -1,0 +1,937 @@
+dict: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+result: CP9o64E52be
+dict: {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180034,513465', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902'}}
+result: Clbyw2S8Qvr
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180034,526275', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+result: cnt3953875727869644192
+The result: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180034,526275', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub3279061325431238164', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub3279061325431238164', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub3279061325431238164
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub3279061325431238164
+assertEqual test
+2000 OK
+assertEqual test
+4103 ORIGINATOR_HAS_NO_PRIVILEGE
+assertEqual test
+2000 OK
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 23
+assertEqual test
+23 SUB
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: cnt3953875727869644192
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180034,526275', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+result: cnt3953875727869644192
+assertEqual test
+cnt3953875727869644192 cnt3953875727869644192
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: testSUB
+assertEqual test
+testSUB testSUB
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 20231208T180034,561727
+The result: 20231208T180034,561727
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 20231208T180034,561727
+The result: 20231208T180034,561727
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 20281206T180034,493188
+The result: 20281206T180034,493188
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: [1, 3]
+The result: [1, 3]
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: [1, 3]
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: [1, 3]
+assertEqual test
+2 2
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: [1, 3]
+assertEqual test
+[1, 3] [1, 3]
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: ['http://localhost:9990']
+The result: ['http://localhost:9990']
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: ['http://localhost:9990']
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: ['http://localhost:9990']
+assertEqual test
+['http://localhost:9990'] ['http://localhost:9990']
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 1
+The result: 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,561727', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+assertEqual test
+5204 SUBSCRIPTION_VERIFICATION_INITIATION_FAILED
+assertEqual test
+4004 NOT_FOUND
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,965886', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1, 'exc': 5}}
+result: 5
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub3279061325431238164', 'pi': 'cnt3953875727869644192', 'ct': '20231208T180034,561727', 'lt': '20231208T180034,965886', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1, 'exc': 5}}
+result: 5
+assertEqual test
+5 5
+The result: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180034,526275', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'nu': ['CP9o64E52be'], 'ri': 'sub5140469637143379755', 'pi': 'cnt3953875727869644192', 'rn': 'sub_9CGWY8GeVd', 'ct': '20231208T180034,988667', 'lt': '20231208T180034,988667', 'ty': 23, 'enc': {'net': [1]}, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub_9CGWY8GeVd
+assertEqual test
+2004 UPDATED
+The result: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub5140469637143379755', 'cr': 'CP9o64E52be'}}
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub5140469637143379755', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub5140469637143379755', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub5140469637143379755
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'ri': 'sub5140469637143379755', 'pi': 'cnt3953875727869644192', 'rn': 'sub_9CGWY8GeVd', 'ct': '20231208T180034,988667', 'lt': '20231208T180035,006567', 'ty': 23, 'enc': {'net': [1]}, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub5140469637143379755
+assertEqual test
+2002 DELETED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2000 OK
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: ['aTag']
+The result: ['aTag']
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: ['aTag']
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: ['aTag']
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: ['aTag']
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: 10
+The result: 10
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: 10
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: 10
+assertEqual test
+10 10
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: 9999
+The result: 9999
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: 9999
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 1, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+result: 9999
+assertEqual test
+9999 9999
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}, 'net': 1}, 'sur': '/id-in/sub3279061325431238164'}}
+result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}, 'net': 1}, 'sur': '/id-in/sub3279061325431238164'}}
+result: 3
+assertEqual test
+3 CNT
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt3953875727869644192', 'pi': 'CP9o64E52be', 'ct': '20231208T180034,526275', 'lt': '20231208T180035,076256', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188', 'lbl': ['aTag'], 'mni': 10, 'mbs': 9999}}, 'net': 1}, 'sur': '/id-in/sub3279061325431238164'}}
+result: testCNT
+assertEqual test
+testCNT testCNT
+assertEqual test
+2001 CREATED
+The result: {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}
+dict: {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}
+result: cin3724778231351545768
+The result: cin3724778231351545768
+dict: {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}
+result: aValue
+assertEqual test
+aValue aValue
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub3279061325431238164'}}
+result: {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}
+The result: {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub3279061325431238164'}}
+result: 4
+assertEqual test
+4 CIN
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cin': {'cnf': 'text/plain:0', 'con': 'aValue', 'ri': 'cin3724778231351545768', 'pi': 'cnt3953875727869644192', 'rn': 'cin_SLHFTDQ42B', 'ct': '20231208T180035,706001', 'lt': '20231208T180035,706001', 'ty': 4, 'cs': 6, 'st': 2, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub3279061325431238164'}}
+result: aValue
+assertEqual test
+aValue aValue
+assertEqual test
+2002 DELETED
+dict: {'m2m:sgn': {'sud': True, 'sur': '/id-in/sub3279061325431238164'}}
+result: True
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180036,322479', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+result: cnt4722383285922769652
+The result: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180036,322479', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub9146034936688050548', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub9146034936688050548', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub9146034936688050548
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub9146034936688050548', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180036,456426', 'lt': '20231208T180036,456426', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub9146034936688050548
+assertEqual test
+4103 ORIGINATOR_HAS_NO_PRIVILEGE
+assertEqual test
+2002 DELETED
+dict: {'m2m:sgn': {'sud': True, 'sur': '/id-in/sub9146034936688050548'}}
+result: True
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nct': 2, 'ri': 'sub4206650536726090051', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180036,926633', 'lt': '20231208T180036,926633', 'ty': 23, 'et': '20281206T180034,493188'}}
+result: 2
+assertEqual test
+2 modifiedAttributes
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub4206650536726090051', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub4206650536726090051', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub4206650536726090051
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nct': 2, 'ri': 'sub4206650536726090051', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180036,926633', 'lt': '20231208T180036,926633', 'ty': 23, 'et': '20281206T180034,493188'}}
+result: sub4206650536726090051
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180036,988267', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+result: {'m2m:cnt': {'lt': '20231208T180036,988267', 'lbl': ['bTag']}}
+The result: {'m2m:cnt': {'lt': '20231208T180036,988267', 'lbl': ['bTag']}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180036,988267', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+result: {'lt': '20231208T180036,988267', 'lbl': ['bTag']}
+The result: {'lt': '20231208T180036,988267', 'lbl': ['bTag']}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180036,988267', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+result: ['bTag']
+assertEqual test
+['bTag'] ['bTag']
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180036,988267', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180037,639584', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+result: {'m2m:cnt': {'lt': '20231208T180037,639584', 'lbl': ['bTag']}}
+The result: {'m2m:cnt': {'lt': '20231208T180037,639584', 'lbl': ['bTag']}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180037,639584', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+result: {'lt': '20231208T180037,639584', 'lbl': ['bTag']}
+The result: {'lt': '20231208T180037,639584', 'lbl': ['bTag']}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180037,639584', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+result: ['bTag']
+assertEqual test
+['bTag'] ['bTag']
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'lt': '20231208T180037,639584', 'lbl': ['bTag']}}, 'net': 1}, 'sur': '/id-in/sub4206650536726090051'}}
+assertEqual test
+2002 DELETED
+dict: {'m2m:sgn': {'sud': True, 'sur': '/id-in/sub4206650536726090051'}}
+result: True
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nct': 3, 'ri': 'sub656904232508789501', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180038,292175', 'lt': '20231208T180038,292175', 'ty': 23, 'et': '20281206T180034,493188'}}
+result: 3
+assertEqual test
+3 ri
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub656904232508789501', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub656904232508789501', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub656904232508789501
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nct': 3, 'ri': 'sub656904232508789501', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180038,292175', 'lt': '20231208T180038,292175', 'ty': 23, 'et': '20281206T180034,493188'}}
+result: sub656904232508789501
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:uri': 'cnt4722383285922769652'}, 'net': 1}, 'sur': '/id-in/sub656904232508789501'}}
+result: {'m2m:uri': 'cnt4722383285922769652'}
+The result: {'m2m:uri': 'cnt4722383285922769652'}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:uri': 'cnt4722383285922769652'}, 'net': 1}, 'sur': '/id-in/sub656904232508789501'}}
+result: cnt4722383285922769652
+The result: cnt4722383285922769652
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:uri': 'cnt4722383285922769652'}, 'net': 1}, 'sur': '/id-in/sub656904232508789501'}}
+result: cnt4722383285922769652
+dict: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180038,440408', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['aTag']}}
+result: cnt4722383285922769652
+assertEqual test
+2002 DELETED
+dict: {'m2m:sgn': {'sud': True, 'sur': '/id-in/sub656904232508789501'}}
+result: True
+The result: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180036,322479', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub4561497978416680402', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180039,272859', 'lt': '20231208T180039,272859', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: {'num': 5, 'dur': 60}
+The result: {'num': 5, 'dur': 60}
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub4561497978416680402', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180039,272859', 'lt': '20231208T180039,272859', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 5
+assertEqual test
+5 5
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub4561497978416680402', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180039,272859', 'lt': '20231208T180039,272859', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 60
+The result: 60
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub4561497978416680402', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180039,272859', 'lt': '20231208T180039,272859', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 60
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub4561497978416680402', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub4561497978416680402', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub4561497978416680402
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub4561497978416680402', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180039,272859', 'lt': '20231208T180039,272859', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub4561497978416680402
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+The result: {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: ['0']
+The result: ['0']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: 0
+assertEqual test
+0 0
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: ['1']
+The result: ['1']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: ['2']
+The result: ['2']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: 2
+assertEqual test
+2 2
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: ['3']
+The result: ['3']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: 3
+assertEqual test
+3 3
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: ['4']
+The result: ['4']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,362245', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 3, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,394389', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 4, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,625835', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 5, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,665883', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 6, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180039,694716', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 7, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: 4
+assertEqual test
+4 4
+http://localhost:8080/cse-in/testAE/testCNT CP9o64E52be {'m2m:cnt': {'lbl': ['99']}}
+assertEqual test
+2004 UPDATED
+assertEqual test
+2002 DELETED
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180040,280949', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 8, 'et': '20281206T180034,493188', 'lbl': ['99']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+The result: {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180040,280949', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 8, 'et': '20281206T180034,493188', 'lbl': ['99']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180040,280949', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 8, 'et': '20281206T180034,493188', 'lbl': ['99']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+assertEqual test
+1 1
+ok
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180040,280949', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 8, 'et': '20281206T180034,493188', 'lbl': ['99']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: ['99']
+The result: ['99']
+hi
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180040,280949', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 8, 'et': '20281206T180034,493188', 'lbl': ['99']}}, 'net': 1}, 'sur': '/id-in/sub4561497978416680402'}]}}
+result: 99
+assertEqual test
+99 99
+The result: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180036,322479', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'dur': 'PT2S'}, 'ri': 'sub30893687961106145', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180040,875581', 'lt': '20231208T180040,875581', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: {'dur': 'PT2S'}
+The result: {'dur': 'PT2S'}
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'dur': 'PT2S'}, 'ri': 'sub30893687961106145', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180040,875581', 'lt': '20231208T180040,875581', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'dur': 'PT2S'}, 'ri': 'sub30893687961106145', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180040,875581', 'lt': '20231208T180040,875581', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: PT2S
+The result: PT2S
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'dur': 'PT2S'}, 'ri': 'sub30893687961106145', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180040,875581', 'lt': '20231208T180040,875581', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: PT2S
+assertEqual test
+PT2S PT2S
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub30893687961106145', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub30893687961106145', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub30893687961106145
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'nu': ['http://localhost:9990'], 'bn': {'dur': 'PT2S'}, 'ri': 'sub30893687961106145', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180040,875581', 'lt': '20231208T180040,875581', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub30893687961106145
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+dict: None
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+The result: {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: ['0']
+The result: ['0']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: 0
+assertEqual test
+0 0
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: ['1']
+The result: ['1']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: ['2']
+The result: ['2']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: 2
+assertEqual test
+2 2
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: ['3']
+The result: ['3']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: 3
+assertEqual test
+3 3
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: ['4']
+The result: ['4']
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180042,967710', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 9, 'et': '20281206T180034,493188', 'lbl': ['0']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,016858', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 10, 'et': '20281206T180034,493188', 'lbl': ['1']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,033270', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 11, 'et': '20281206T180034,493188', 'lbl': ['2']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,050977', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 12, 'et': '20281206T180034,493188', 'lbl': ['3']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}, {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180043,068567', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 13, 'et': '20281206T180034,493188', 'lbl': ['4']}}, 'net': 1}, 'sur': '/id-in/sub30893687961106145'}]}}
+result: 4
+assertEqual test
+4 4
+assertEqual test
+2002 DELETED
+The result: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180036,322479', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1], 'atr': ['lbl']}, 'nu': ['http://localhost:9990'], 'ri': 'sub2372956240170802054', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180047,684986', 'lt': '20231208T180047,684986', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: ['lbl']
+The result: ['lbl']
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1], 'atr': ['lbl']}, 'nu': ['http://localhost:9990'], 'ri': 'sub2372956240170802054', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180047,684986', 'lt': '20231208T180047,684986', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: ['lbl']
+assertEqual test
+['lbl'] ['lbl']
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub2372956240170802054', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub2372956240170802054', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub2372956240170802054
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1], 'atr': ['lbl']}, 'nu': ['http://localhost:9990'], 'ri': 'sub2372956240170802054', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180047,684986', 'lt': '20231208T180047,684986', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub2372956240170802054
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180047,724341', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 14, 'et': '20281206T180034,493188', 'lbl': ['hello']}}, 'net': 1}, 'sur': '/id-in/sub2372956240170802054'}}
+result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180047,724341', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 14, 'et': '20281206T180034,493188', 'lbl': ['hello']}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180047,724341', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 14, 'et': '20281206T180034,493188', 'lbl': ['hello']}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180047,724341', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 14, 'et': '20281206T180034,493188', 'lbl': ['hello']}}, 'net': 1}, 'sur': '/id-in/sub2372956240170802054'}}
+result: {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180047,724341', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 14, 'et': '20281206T180034,493188', 'lbl': ['hello']}
+The result: {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180047,724341', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 14, 'et': '20281206T180034,493188', 'lbl': ['hello']}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180047,724341', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 14, 'et': '20281206T180034,493188', 'lbl': ['hello']}}, 'net': 1}, 'sur': '/id-in/sub2372956240170802054'}}
+result: ['hello']
+assertEqual test
+['hello'] ['hello']
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'nu': ['http://localhost:9990'], 'ri': 'sub2372956240170802054', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180047,684986', 'lt': '20231208T180048,307147', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1, 'enc': {'net': [1]}}}
+result: {'net': [1]}
+The result: {'net': [1]}
+dict: {'m2m:sub': {'rn': 'testSUB', 'nu': ['http://localhost:9990'], 'ri': 'sub2372956240170802054', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180047,684986', 'lt': '20231208T180048,307147', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1, 'enc': {'net': [1]}}}
+result: 1
+assertEqual test
+1 resourceUpdate
+assertEqual test
+2002 DELETED
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'ln': True, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub8939578360156322141', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180048,358006', 'lt': '20231208T180048,358006', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: {'num': 5, 'dur': 60}
+The result: {'num': 5, 'dur': 60}
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'ln': True, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub8939578360156322141', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180048,358006', 'lt': '20231208T180048,358006', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: 5
+assertEqual test
+5 5
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'ln': True, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub8939578360156322141', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180048,358006', 'lt': '20231208T180048,358006', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: True
+The result: True
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'ln': True, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub8939578360156322141', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180048,358006', 'lt': '20231208T180048,358006', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: True
+assertEqual test
+True True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub8939578360156322141', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub8939578360156322141', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub8939578360156322141
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1]}, 'ln': True, 'nu': ['http://localhost:9990'], 'bn': {'num': 5, 'dur': 60}, 'ri': 'sub8939578360156322141', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180048,358006', 'lt': '20231208T180048,358006', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub8939578360156322141
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180048,671728', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 20, 'et': '20281206T180034,493188', 'lbl': ['4'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub8939578360156322141'}]}}
+result: [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180048,671728', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 20, 'et': '20281206T180034,493188', 'lbl': ['4'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub8939578360156322141'}]
+The result: [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180048,671728', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 20, 'et': '20281206T180034,493188', 'lbl': ['4'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub8939578360156322141'}]
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180048,671728', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 20, 'et': '20281206T180034,493188', 'lbl': ['4'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub8939578360156322141'}]}}
+result: [{'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180048,671728', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 20, 'et': '20281206T180034,493188', 'lbl': ['4'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub8939578360156322141'}]
+assertEqual test
+1 1
+The result: 4
+assertEqual test
+4 4
+assertEqual test
+2002 DELETED
+The result: {'m2m:ae': {'rn': 'testAE', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CP9o64E52be', 'pi': 'id-in', 'ct': '20231208T180034,483210', 'lt': '20231208T180034,483210', 'ty': 2, 'aei': 'CP9o64E52be', 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180036,322479', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [3], 'chty': [3]}, 'ln': True, 'nu': ['http://localhost:9990'], 'ri': 'sub6543788403036213405', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180049,277301', 'lt': '20231208T180049,277301', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: [3]
+The result: [3]
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [3], 'chty': [3]}, 'ln': True, 'nu': ['http://localhost:9990'], 'ri': 'sub6543788403036213405', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180049,277301', 'lt': '20231208T180049,277301', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: [3]
+assertEqual test
+[3] [CNT]
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6543788403036213405', 'cr': 'CP9o64E52be'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6543788403036213405', 'cr': 'CP9o64E52be'}}
+result: /id-in/sub6543788403036213405
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [3], 'chty': [3]}, 'ln': True, 'nu': ['http://localhost:9990'], 'ri': 'sub6543788403036213405', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180049,277301', 'lt': '20231208T180049,277301', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub6543788403036213405
+assertEqual test
+2001 CREATED
+assertEqual test
+2001 CREATED
+The result: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNTSub', 'ri': 'cnt3587807606286112260', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180049,334786', 'lt': '20231208T180049,334786', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub6543788403036213405'}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNTSub', 'ri': 'cnt3587807606286112260', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180049,334786', 'lt': '20231208T180049,334786', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub6543788403036213405'}}
+result: testCNTSub
+The result: testCNTSub
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNTSub', 'ri': 'cnt3587807606286112260', 'pi': 'cnt4722383285922769652', 'ct': '20231208T180049,334786', 'lt': '20231208T180049,334786', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub6543788403036213405'}}
+result: testCNTSub
+assertEqual test
+testCNTSub testCNTSub
+assertEqual test
+2002 DELETED
+assertEqual test
+2002 DELETED
+assertEqual test
+2001 CREATED
+dict: {'m2m:ae': {'rn': 'testAE2', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'CEzM46M8B6F', 'pi': 'id-in', 'ct': '20231208T180049,991789', 'lt': '20231208T180049,991789', 'ty': 2, 'aei': 'CEzM46M8B6F', 'et': '20281206T180049,996396'}}
+result: CEzM46M8B6F
+assertEqual test
+2001 CREATED
+dict: None
+assertEqual test
+2001 CREATED
+The result: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt6400179769345750563', 'pi': 'CEzM46M8B6F', 'ct': '20231208T180050,079626', 'lt': '20231208T180050,079626', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180049,996396'}}, 'net': 3}, 'sur': '/id-in/sub5605641808225516417'}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt6400179769345750563', 'pi': 'CEzM46M8B6F', 'ct': '20231208T180050,079626', 'lt': '20231208T180050,079626', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180049,996396'}}, 'net': 3}, 'sur': '/id-in/sub5605641808225516417'}}
+result: testCNT
+The result: testCNT
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt6400179769345750563', 'pi': 'CEzM46M8B6F', 'ct': '20231208T180050,079626', 'lt': '20231208T180050,079626', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180049,996396'}}, 'net': 3}, 'sur': '/id-in/sub5605641808225516417'}}
+result: testCNT
+assertEqual test
+testCNT testCNT
+assertEqual test
+2004 UPDATED
+dict: {'m2m:ae': {'rn': 'testAE2', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'CEzM46M8B6F', 'pi': 'id-in', 'ct': '20231208T180049,991789', 'lt': '20231208T180050,783343', 'ty': 2, 'aei': 'CEzM46M8B6F', 'et': '20281206T180049,996396', 'csz': ['application/cbor']}}
+result: ['application/cbor']
+The result: ['application/cbor']
+dict: {'m2m:ae': {'rn': 'testAE2', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'CEzM46M8B6F', 'pi': 'id-in', 'ct': '20231208T180049,991789', 'lt': '20231208T180050,783343', 'ty': 2, 'aei': 'CEzM46M8B6F', 'et': '20281206T180049,996396', 'csz': ['application/cbor']}}
+result: ['application/cbor']
+assertEqual test
+['application/cbor'] ['application/cbor']
+assertEqual test
+2001 CREATED
+The result: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT2', 'ri': 'cnt1479312892711533788', 'pi': 'CEzM46M8B6F', 'ct': '20231208T180050,823349', 'lt': '20231208T180050,823349', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180049,996396'}}, 'net': 3}, 'sur': '/id-in/sub5605641808225516417'}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT2', 'ri': 'cnt1479312892711533788', 'pi': 'CEzM46M8B6F', 'ct': '20231208T180050,823349', 'lt': '20231208T180050,823349', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180049,996396'}}, 'net': 3}, 'sur': '/id-in/sub5605641808225516417'}}
+result: testCNT2
+The result: testCNT2
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT2', 'ri': 'cnt1479312892711533788', 'pi': 'CEzM46M8B6F', 'ct': '20231208T180050,823349', 'lt': '20231208T180050,823349', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180049,996396'}}, 'net': 3}, 'sur': '/id-in/sub5605641808225516417'}}
+result: testCNT2
+assertEqual test
+testCNT2 testCNT2
+assertEqual test
+2002 DELETED
+assertEqual test
+2001 CREATED
+dict: {'m2m:ae': {'rn': 'testAE2', 'api': 'NMyApp1Id', 'rr': False, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Cv7S3EmCgK0', 'pi': 'id-in', 'ct': '20231208T180051,573162', 'lt': '20231208T180051,573162', 'ty': 2, 'aei': 'Cv7S3EmCgK0', 'et': '20281206T180051,580144'}}
+result: Cv7S3EmCgK0
+assertEqual test
+2001 CREATED
+dict: None
+assertEqual test
+2001 CREATED
+assertEqual test
+2002 DELETED
+assertEqual test
+2001 CREATED
+dict: {'m2m:ae': {'rn': 'testAE2', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CKRoS421zf0', 'pi': 'id-in', 'ct': '20231208T180052,007631', 'lt': '20231208T180052,007631', 'ty': 2, 'aei': 'CKRoS421zf0', 'et': '20281206T180052,016425'}}
+result: CKRoS421zf0
+assertEqual test
+2001 CREATED
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub3717194490750183759', 'cr': 'CKRoS421zf0'}}
+result: True
+The result: True
+assertEqual test
+2001 CREATED
+The result: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT2', 'ri': 'cnt5188130160778315041', 'pi': 'CKRoS421zf0', 'ct': '20231208T180052,081185', 'lt': '20231208T180052,081185', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180052,016425'}}, 'net': 3}, 'sur': '/id-in/sub3717194490750183759'}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT2', 'ri': 'cnt5188130160778315041', 'pi': 'CKRoS421zf0', 'ct': '20231208T180052,081185', 'lt': '20231208T180052,081185', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180052,016425'}}, 'net': 3}, 'sur': '/id-in/sub3717194490750183759'}}
+result: testCNT2
+The result: testCNT2
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT2', 'ri': 'cnt5188130160778315041', 'pi': 'CKRoS421zf0', 'ct': '20231208T180052,081185', 'lt': '20231208T180052,081185', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180052,016425'}}, 'net': 3}, 'sur': '/id-in/sub3717194490750183759'}}
+result: testCNT2
+assertEqual test
+testCNT2 testCNT2
+assertEqual test
+2002 DELETED
+assertEqual test
+2001 CREATED
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub1026187473652526867', 'cr': 'CP9o64E52be'}}
+result: True
+The result: True
+assertEqual test
+2001 CREATED
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT3', 'ri': 'cnt427545294680222942', 'pi': 'CP9o64E52be', 'ct': '20231208T180053,096071', 'lt': '20231208T180053,096071', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub1026187473652526867'}}
+result: {'m2m:cnt': {'rn': 'testCNT3', 'ri': 'cnt427545294680222942', 'pi': 'CP9o64E52be', 'ct': '20231208T180053,096071', 'lt': '20231208T180053,096071', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+The result: {'m2m:cnt': {'rn': 'testCNT3', 'ri': 'cnt427545294680222942', 'pi': 'CP9o64E52be', 'ct': '20231208T180053,096071', 'lt': '20231208T180053,096071', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT3', 'ri': 'cnt427545294680222942', 'pi': 'CP9o64E52be', 'ct': '20231208T180053,096071', 'lt': '20231208T180053,096071', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub1026187473652526867'}}
+result: 3
+assertEqual test
+3 CNT
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT3', 'ri': 'cnt427545294680222942', 'pi': 'CP9o64E52be', 'ct': '20231208T180053,096071', 'lt': '20231208T180053,096071', 'ty': 3, 'cni': 0, 'cbs': 0, 'st': 0, 'et': '20281206T180034,493188'}}, 'net': 3}, 'sur': '/id-in/sub1026187473652526867'}}
+result: testCNT3
+assertEqual test
+testCNT3 testCNT3
+assertEqual test
+2000 OK
+assertEqual test
+2001 CREATED
+assertEqual test
+4004 NOT_FOUND
+dict: {'m2m:ae': {'rn': 'testAENoPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'ri': 'CroWE7Sp8xr', 'pi': 'id-in', 'ct': '20231208T180034,501381', 'lt': '20231208T180034,501381', 'ty': 2, 'aei': 'CroWE7Sp8xr', 'et': '20281206T180034,505306'}}
+result: CroWE7Sp8xr
+assertEqual test
+5204 SUBSCRIPTION_VERIFICATION_INITIATION_FAILED
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'cr': 'CP9o64E52be', 'ri': 'sub6668756989762463909', 'pi': 'cnt4722383285922769652', 'rn': 'sub_mHuZpVtlXw', 'ct': '20231208T180056,147108', 'lt': '20231208T180056,147108', 'ty': 23, 'enc': {'net': [1]}, 'et': '20281206T180034,493188', 'nct': 1}}
+result: CP9o64E52be
+assertEqual test
+CP9o64E52be CP9o64E52be
+The result: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6668756989762463909', 'cr': 'CP9o64E52be'}}
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6668756989762463909', 'cr': 'CP9o64E52be'}}
+result: True
+The result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6668756989762463909', 'cr': 'CP9o64E52be'}}
+result: CP9o64E52be
+The result: CP9o64E52be
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6668756989762463909', 'cr': 'CP9o64E52be'}}
+result: CP9o64E52be
+assertEqual test
+CP9o64E52be CP9o64E52be
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'cr': 'CP9o64E52be', 'ri': 'sub6668756989762463909', 'pi': 'cnt4722383285922769652', 'rn': 'sub_mHuZpVtlXw', 'ct': '20231208T180056,147108', 'lt': '20231208T180056,147108', 'ty': 23, 'enc': {'net': [1]}, 'et': '20281206T180034,493188', 'nct': 1}}
+result: sub_mHuZpVtlXw
+assertEqual test
+2000 OK
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'cr': 'CP9o64E52be', 'ri': 'sub6668756989762463909', 'pi': 'cnt4722383285922769652', 'rn': 'sub_mHuZpVtlXw', 'ct': '20231208T180056,147108', 'lt': '20231208T180056,147108', 'ty': 23, 'enc': {'net': [1]}, 'et': '20281206T180034,493188', 'nct': 1}}
+result: CP9o64E52be
+assertEqual test
+CP9o64E52be CP9o64E52be
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'cr': 'CP9o64E52be', 'enc': {'net': [1]}, 'ri': 'sub6153559746684794512', 'pi': 'cnt4722383285922769652', 'rn': 'sub_sb8FdcQZDe', 'ct': '20231208T180056,308423', 'lt': '20231208T180056,308423', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 1}}
+result: CP9o64E52be
+assertEqual test
+CP9o64E52be CP9o64E52be
+The result: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+result: True
+The result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+result: CP9o64E52be
+The result: CP9o64E52be
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+result: CP9o64E52be
+assertEqual test
+CP9o64E52be CP9o64E52be
+assertEqual test
+2004 UPDATED
+The result: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180056,568896', 'ty': 3, 'cni': 1, 'cbs': 6, 'st': 22, 'et': '20281206T180034,493188', 'lbl': ['aLabel'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180056,568896', 'ty': 3, 'cni': 1, 'cbs': 6, 'st': 22, 'et': '20281206T180034,493188', 'lbl': ['aLabel'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+result: CP9o64E52be
+The result: CP9o64E52be
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180056,568896', 'ty': 3, 'cni': 1, 'cbs': 6, 'st': 22, 'et': '20281206T180034,493188', 'lbl': ['aLabel'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+result: CP9o64E52be
+assertEqual test
+CP9o64E52be CP9o64E52be
+dict: {'m2m:sgn': {'nev': {'rep': {'m2m:cnt': {'rn': 'testCNT', 'ri': 'cnt4722383285922769652', 'pi': 'CP9o64E52be', 'ct': '20231208T180036,322479', 'lt': '20231208T180056,568896', 'ty': 3, 'cni': 1, 'cbs': 6, 'st': 22, 'et': '20281206T180034,493188', 'lbl': ['aLabel'], 'mni': 99}}, 'net': 1}, 'sur': '/id-in/sub6153559746684794512', 'cr': 'CP9o64E52be'}}
+result: 1
+assertEqual test
+1 resourceUpdate
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2001 CREATED
+dict: {'m2m:ts': {'ri': 'ts6364354196971380889', 'pi': 'CP9o64E52be', 'rn': 'ts_daH0z6eQX8', 'ct': '20231208T180057,268597', 'lt': '20231208T180057,268597', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_daH0z6eQX8
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2001 CREATED
+dict: {'m2m:ts': {'ri': 'ts6665709884053105717', 'pi': 'CP9o64E52be', 'rn': 'ts_h1wPaRHNiX', 'ct': '20231208T180057,540630', 'lt': '20231208T180057,540630', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_h1wPaRHNiX
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 5, 'dur': 'PT10S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,689678', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: [8]
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 5, 'dur': 'PT10S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,689678', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: 5
+assertEqual test
+5 5
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 5, 'dur': 'PT10S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,689678', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: PT10S
+assertEqual test
+PT10S PT10S
+dict: {'m2m:ts': {'ri': 'ts6665709884053105717', 'pi': 'CP9o64E52be', 'rn': 'ts_h1wPaRHNiX', 'ct': '20231208T180057,540630', 'lt': '20231208T180057,540630', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_h1wPaRHNiX
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 5, 'dur': 'PT10S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,689678', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: sub_AfNfWM7qxd
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 10, 'dur': 'PT20S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,752923', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: [8]
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 10, 'dur': 'PT20S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,752923', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: 10
+assertEqual test
+10 10
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 10, 'dur': 'PT20S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,752923', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: PT20S
+assertEqual test
+PT20S PT20S
+dict: {'m2m:ts': {'ri': 'ts6665709884053105717', 'pi': 'CP9o64E52be', 'rn': 'ts_h1wPaRHNiX', 'ct': '20231208T180057,540630', 'lt': '20231208T180057,540630', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_h1wPaRHNiX
+dict: {'m2m:sub': {'nu': ['http://localhost:9990'], 'enc': {'net': [8], 'md': {'num': 5, 'dur': 'PT10S'}}, 'ri': 'sub9203498648753564766', 'pi': 'ts6665709884053105717', 'rn': 'sub_AfNfWM7qxd', 'ct': '20231208T180057,689678', 'lt': '20231208T180057,689678', 'ty': 23, 'et': '20281206T180034,493188', 'nct': 5}}
+result: sub_AfNfWM7qxd
+assertEqual test
+2002 DELETED
+assertEqual test
+2001 CREATED
+dict: {'m2m:ts': {'ri': 'ts418229324317994017', 'pi': 'CP9o64E52be', 'rn': 'ts_da1HnJWCc0', 'ct': '20231208T180058,103828', 'lt': '20231208T180058,103828', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_da1HnJWCc0
+assertEqual test
+4000 BAD_REQUEST
+dict: {'m2m:ts': {'ri': 'ts418229324317994017', 'pi': 'CP9o64E52be', 'rn': 'ts_da1HnJWCc0', 'ct': '20231208T180058,103828', 'lt': '20231208T180058,103828', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_da1HnJWCc0
+assertEqual test
+4000 BAD_REQUEST
+dict: {'m2m:ts': {'ri': 'ts418229324317994017', 'pi': 'CP9o64E52be', 'rn': 'ts_da1HnJWCc0', 'ct': '20231208T180058,103828', 'lt': '20231208T180058,103828', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_da1HnJWCc0
+assertEqual test
+4000 BAD_REQUEST
+dict: {'m2m:ts': {'ri': 'ts418229324317994017', 'pi': 'CP9o64E52be', 'rn': 'ts_da1HnJWCc0', 'ct': '20231208T180058,103828', 'lt': '20231208T180058,103828', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_da1HnJWCc0
+assertEqual test
+4000 BAD_REQUEST
+dict: {'m2m:ts': {'ri': 'ts418229324317994017', 'pi': 'CP9o64E52be', 'rn': 'ts_da1HnJWCc0', 'ct': '20231208T180058,103828', 'lt': '20231208T180058,103828', 'ty': 29, 'mdd': False, 'cni': 0, 'cbs': 0, 'mdc': 0, 'et': '20281206T180034,493188'}}
+result: ts_da1HnJWCc0
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2001 CREATED
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'nu': ['cse-in/testAEPOA'], 'enc': {'net': [3]}, 'ri': 'sub5207300230204957534', 'pi': 'Clbyw2S8Qvr', 'rn': 'sub_0oPuwtyFr4', 'ct': '20231208T180059,095718', 'lt': '20231208T180059,095718', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1}}
+result: sub_0oPuwtyFr4
+assertEqual test
+2002 DELETED
+assertEqual test
+5204 SUBSCRIPTION_VERIFICATION_INITIATION_FAILED
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2001 CREATED
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2004 UPDATED
+The result: {'m2m:sgn': {'nev': {'net': 7, 'rep': {'m2m:ae': {'lbl': ['aLabel']}}}, 'sur': '/id-in/sub4906217123012702818'}}
+dict: {'m2m:sgn': {'nev': {'net': 7, 'rep': {'m2m:ae': {'lbl': ['aLabel']}}}, 'sur': '/id-in/sub4906217123012702818'}}
+result: 7
+assertEqual test
+7 blockingUpdate
+dict: {'m2m:sgn': {'nev': {'net': 7, 'rep': {'m2m:ae': {'lbl': ['aLabel']}}}, 'sur': '/id-in/sub4906217123012702818'}}
+result: ['aLabel']
+The result: ['aLabel']
+assertEqual test
+2004 UPDATED
+assertEqual test
+4127 OPERATION_DENIED_BY_REMOTE_ENTITY
+assertEqual test
+2002 DELETED
+The result: {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180034,513465', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902'}}
+assertEqual test
+2001 CREATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180102,315495', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1}}
+result: True
+The result: True
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180102,315495', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1}}
+result: True
+assertEqual test
+True True
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180102,315495', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1}}
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub5525799065381725907', 'cr': 'Clbyw2S8Qvr'}}
+result: True
+dict: {'m2m:sgn': {'vrq': True, 'sur': '/id-in/sub5525799065381725907', 'cr': 'Clbyw2S8Qvr'}}
+result: /id-in/sub5525799065381725907
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180102,315495', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1}}
+result: sub5525799065381725907
+assertEqual test
+2004 UPDATED
+assertEqual test
+2000 OK
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180102,315495', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180102,315495', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180102,315495', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': False, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,715549', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': False, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,715549', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': False, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,715549', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,771105', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1}}
+assertEqual test
+2004 UPDATED
+assertEqual test
+2000 OK
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,771105', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,771105', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,771105', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180103,771105', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 1, 'rsr': 1, 'noec': 1}]}}
+result: 1
+assertEqual test
+1 1
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180104,428494', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1}}
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180104,466488', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}}}
+result: 5
+The result: 5
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180104,466488', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}}}
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+assertEqual test
+2004 UPDATED
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,486148', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,510373', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,530379', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,649846', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,774816', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}]}}
+The result: {'m2m:sgn': [{'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,486148', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,510373', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,530379', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,649846', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,774816', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}]}
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,486148', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,510373', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,530379', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,649846', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,774816', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}]}}
+result: [{'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,486148', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,510373', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,530379', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,649846', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,774816', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}]
+The result: [{'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,486148', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,510373', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,530379', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,649846', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,774816', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}]
+dict: {'m2m:agn': {'m2m:sgn': [{'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,486148', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,510373', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,530379', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,649846', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,774816', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}]}}
+result: [{'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,486148', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,510373', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,530379', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,649846', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}, {'nev': {'rep': {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180104,774816', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902', 'lbl': ['test'], 'apn': 'somethingElse', 'aa': None}}, 'net': 1}, 'sur': '/id-in/sub5525799065381725907'}]
+assertEqual test
+5 5
+assertEqual test
+2000 OK
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180104,466488', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 5, 'rsr': 5, 'noec': 5}]}}
+result: [{'tg': 'http://localhost:9990', 'rqs': 5, 'rsr': 5, 'noec': 5}]
+The result: [{'tg': 'http://localhost:9990', 'rqs': 5, 'rsr': 5, 'noec': 5}]
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180104,466488', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 5, 'rsr': 5, 'noec': 5}]}}
+result: 5
+assertEqual test
+5 5
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180104,466488', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 5, 'rsr': 5, 'noec': 5}]}}
+result: 5
+assertEqual test
+5 5
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'nse': True, 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180104,466488', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}, 'nsi': [{'tg': 'http://localhost:9990', 'rqs': 5, 'rsr': 5, 'noec': 5}]}}
+result: 5
+assertEqual test
+5 5
+assertEqual test
+2004 UPDATED
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180106,384404', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}}}
+dict: {'m2m:sub': {'rn': 'testSUB', 'enc': {'net': [1, 3]}, 'nu': ['http://localhost:9990'], 'su': 'http://localhost:9990', 'ri': 'sub5525799065381725907', 'pi': 'Clbyw2S8Qvr', 'ct': '20231208T180102,315495', 'lt': '20231208T180106,384404', 'ty': 23, 'et': '20281206T180034,517902', 'nct': 1, 'bn': {'num': 5}}}
+assertEqual test
+4000 BAD_REQUEST
+The result: {'m2m:ae': {'rn': 'testAEPOA', 'api': 'NMyApp1Id', 'rr': True, 'srv': ['4'], 'poa': ['http://localhost:9990'], 'ri': 'Clbyw2S8Qvr', 'pi': 'id-in', 'ct': '20231208T180034,513465', 'lt': '20231208T180034,513465', 'ty': 2, 'aei': 'Clbyw2S8Qvr', 'et': '20281206T180034,517902'}}
+assertEqual test
+2001 CREATED
+assertEqual test
+4000 BAD_REQUEST
+assertEqual test
+2002 DELETED

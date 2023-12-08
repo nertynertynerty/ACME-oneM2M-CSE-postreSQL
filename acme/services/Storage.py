@@ -899,7 +899,7 @@ class Subscriptions(object):
 				for j,k in dict.items(i[0]):
 					tmp[j] = k
 				tmps.append(tmp)
-			stats = tmps
+			stats = tmps[0] if len(tmps)==1 else tmps
 		except db.DatabaseError as db_err:
 			stats = None
 			print(db_err)
@@ -932,12 +932,15 @@ class Subscriptions(object):
 	
 	def update(self,stats,cond =None, doc_ids:int = None):
 		print("update")
-		
+  
+		# if doc_ids:
+		# 	tmp = {"id":doc_ids}
+		# else:
 		try:
 			tmp = {"id":stats['ri']}
 		except:
 			tmp = {"id":self.doc_id}
-   
+
 		self.doc_id+=1
 		tmp.update(stats)
 		stats = tmp
@@ -953,18 +956,24 @@ class Subscriptions(object):
 					j = f"ARRAY {j}" 
 				elif isinstance(j,dict):
 					j = json.dumps(j).replace("'",'"')
-					print(j)
+					print(f"dict: {j}")
 					j = f"'{j}'"
+				elif isinstance(j,bool):
+					j = str(j)
+					print(j)
 				elif isinstance(j,int):
+					print(f"int: {j} ")
 					try:
 						j = int(j)
 					except:
 						j = j
+					print(f"The value is: {j}")
 				else:
+					print("type error: {j}")
 					j = 1
 				sql+=f"{i} = {j}, "
 		except Exception as e:
-			print(e)
+			print(f"error: {e}")
 		sql = sql[:-2]		
 		
 		sql +=f" where id='{doc_ids}'"
@@ -980,6 +989,7 @@ class Subscriptions(object):
 		return stats
 		
 	def insert(self,stats:JSON) -> int:
+		print(f"bn:{stats['bn']}")
 		try:
 			tmp = {"id":stats['ri']}
 		except:
@@ -1005,11 +1015,16 @@ class Subscriptions(object):
 				j = json.dumps(j).replace("'",'"')
 				print(j)
 				j = f"'{j}'"
+			elif isinstance(j,bool):
+				j = str(j)
+				print(j)
 			elif isinstance(j,int):
+				print(j)
 				try:
 					j = int(j)
 				except:
-					j = 1
+					j = j
+		
 			else:
 				print(f"error->{j}")
 				j = 1
@@ -1033,7 +1048,7 @@ class Subscriptions(object):
 		Truncate the table by removing all documents.
 		"""
 		# 다 없애는 것이라 하여 다 없애봄
-		sql = f'drop table {self.db2name}'
+		sql = f'truncate table {self.db2name}'
 		
 		try:
 			self.cur.execute(sql)
@@ -1800,6 +1815,7 @@ class TinyDBBinding(object):
 				True if the subscription representation was updated or inserted, False otherwise.
 		"""
 		# with self.lockSubscriptions:
+		print(subscription)
 		ri = subscription.ri
 		try:
 			target = {

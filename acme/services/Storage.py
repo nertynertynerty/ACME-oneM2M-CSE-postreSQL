@@ -44,6 +44,9 @@ from ..resources.SCH import SCH
 from ..resources.Factory import resourceFromDict
 from ..services.Logging import Logging as L
 
+import psycopg2 as db
+from psycopg2 import extras
+import json
 
 # Constants for database and table names
 _resources = 'resources'
@@ -70,12 +73,18 @@ class Storage(object):
 	"""	This class implements the entry points to the CSE's underlying database functions.
 	"""
 
-	__slots__ = (
-		'inMemory',
-		'dbPath',
-		'dbReset',
-		'db',
-	)
+	# __slots__ = (
+	# 	'inMemory',
+	# 	'dbPath',
+	# 	'dbReset',
+	# 	'db',
+  
+	# 	'conn',
+	# 	'cur',
+	# 	'tmp'
+	# 	'db2'
+	# )
+ 
 	""" Define slots for instance variables. """
 
 	def __init__(self) -> None:
@@ -84,9 +93,21 @@ class Storage(object):
 			Raises:
 				RuntimeError: In case of an error during initialization.
 		"""
-
-		# create data directory
 		self._assignConfig()
+	
+		# create data directory
+		
+		host = "localhost"
+		port = 5432
+		database = "test_db"
+		user = "test"
+		password = "test"
+
+		self.conn = db.connect(
+			host=host, port=port, database=database, user=user, password=password
+		)
+
+		self.cur = self.conn.cursor(cursor_factory=extras.DictCursor)
 
 		if not self.inMemory:
 			if self.dbPath:
@@ -96,7 +117,7 @@ class Storage(object):
 				raise RuntimeError(L.logErr('database.path not set'))
 
 		# create DB object and open DB
-		self.db = TinyDBBinding(self.dbPath, CSE.cseCsi[1:]) # add CSE CSI as postfix
+		self.db = TinyDBBinding(self.dbPath, CSE.cseCsi[1:],self.conn) # add CSE CSI as postfix
 		""" The database object. """
 
 		# Reset dbs?
@@ -113,6 +134,7 @@ class Storage(object):
 			raise RuntimeError('DB Error')
 
 		L.isInfo and L.log('Storage initialized')
+
 
 
 	def shutdown(self) -> bool:
@@ -828,6 +850,109 @@ class Storage(object):
 
 #########################################################################
 #
+#	nertynerty CLASS
+#
+#	This class may be moved later to an own module.
+
+class Request(object):
+    def __init__(self,path:str,dbname:str):
+        self.conn = path
+        self.cur = path.cursor()
+        self.db2name = dbname
+        self.cur.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS {self.db2name}  (
+                ri VARCHAR(255),
+                srn VARCHAR(255),
+                ts FLOAT,
+                org VARCHAR(255),
+                op INTEGER,
+                rsc INTEGER,
+                out BOOLEAN,
+                ot VARCHAR(255),
+                req JSON,
+                rsp JSON,
+                PRIMARY KEY(ts)
+            );
+            """
+        )
+        self.conn.commit()
+        
+    def insert(self,stats:JSON) -> int:
+        query = """
+                INSERT INTO requests (ri, srn, ts, org, op, rsc, out, ot, req, rsp)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+            """
+        data = (stats['ri'], stats['srn'], stats['ts'], stats['org'], stats['op'], stats['rsc'], stats['out'], stats['ot'], json.dumps(stats['req']), json.dumps(stats['rsp']))
+        try:
+            self.cur.mogrify(query, data)
+            self.cur.execute(query, data)
+            self.conn.commit()
+        except db.DatabaseError as db_err:
+            print("error")
+            print(db_err)
+        print(stats)
+        stats = stats['ts']
+        return stats
+    
+    def remove(self, ri:str)->None:
+        """
+        Remnove all stord requests from the database.
+        """
+        sql = f'DELETE FROM {self.db2name} WHERE ri={ri}'
+        
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except :
+            print("error")
+            
+    def truncate(self)->None:
+        """
+        Truncate the table by removing all documents.
+        """
+        # 다 없애는 것이라 하여 다 없애봄
+        sql = f'DELETE FROM {self.db2name}'
+        
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except :
+            print("error")
+    
+    def search(self, ri:str)->list:
+        sql = f"SELECT row_to_json({self.db2name}) FROM {self.db2name} WHERE ri={ri}"
+        try:
+            self.cur.execute(sql)
+            stats = self.cur.fetchall()
+            
+            return [stats]
+            
+        except :
+            print("error")
+        print(stats)
+        return []
+    
+    def all(self):
+        sql =f"SELECT row_to_json({self.db2name}) from {self.db2name}"
+        try:
+            self.cur.execute(sql)
+            stats = self.cur.fetchall()
+        
+            # tmps=[]
+            # tmp={}
+            # for i in stats:
+            #     for j,k in dict.items(i[0]):
+            #         tmp[j] = k
+            #     tmps.append(tmp)
+            stats = [stats]
+        
+        except Exception as e:
+            stats = []
+        return stats
+
+#########################################################################
+#
 #	DB class that implements the TinyDB binding
 #
 #	This class may be moved later to an own module.
@@ -837,63 +962,69 @@ class TinyDBBinding(object):
 	"""	This class implements the TinyDB binding to the database. It is used by the Storage class.
 	"""
 
-	__slots__ = (
-		'path',
-		'cacheSize',
-		'writeDelay',
-		'maxRequests',
+	# __slots__ = (
+	# 	'path',
+	# 	'cacheSize',
+	# 	'writeDelay',
+	# 	'maxRequests',
 		
-		'lockResources',
-		'lockIdentifiers',
-		'lockChildResources',
-		'lockStructuredIDs',
-		'lockSubscriptions',
-		'lockBatchNotifications',
-		'lockStatistics',
-		'lockActions',
-		'lockRequests',
-		'lockSchedules',
+	# 	'lockResources',
+	# 	'lockIdentifiers',
+	# 	'lockChildResources',
+	# 	'lockStructuredIDs',
+	# 	'lockSubscriptions',
+	# 	'lockBatchNotifications',
+	# 	'lockStatistics',
+	# 	'lockActions',
+	# 	'lockRequests',
+	# 	'lockSchedules',
 
-		'fileResources',
-		'fileIdentifiers',
-		'fileSubscriptions',
-		'fileBatchNotifications',
-		'fileStatistics',
-		'fileActions',
-		'fileRequests',
-		'fileSchedules',
+	# 	'fileResources',
+	# 	'fileIdentifiers',
+	# 	'fileSubscriptions',
+	# 	'fileBatchNotifications',
+	# 	'fileStatistics',
+	# 	'fileActions',
+	# 	'fileRequests',
+	# 	'fileSchedules',
 		
-		'dbResources',
-		'dbIdentifiers', 		
-		'dbSubscriptions', 	
-		'dbBatchNotifications',
-		'dbStatistics',
-		'dbActions',	
-		'dbRequests',	
-		'dbSchedules',	
+	# 	'dbResources',
+	# 	'dbIdentifiers', 		
+	# 	'dbSubscriptions', 	
+	# 	'dbBatchNotifications',
+	# 	'dbStatistics',
+	# 	'dbActions',	
+	# 	'dbRequests',	
+	# 	'dbSchedules',	
 
-		'tabResources',
-		'tabIdentifiers',
-		'tabChildResources',
-		'tabStructuredIDs',
-		'tabSubscriptions',
-		'tabBatchNotifications',
-		'tabStatistics',
-		'tabActions',
-		'tabRequests',
-		'tabSchedules',
+	# 	'tabResources',
+	# 	'tabIdentifiers',
+	# 	'tabChildResources',
+	# 	'tabStructuredIDs',
+	# 	'tabSubscriptions',
+	# 	'tabBatchNotifications',
+	# 	'tabStatistics',
+	# 	'tabActions',
+	# 	'tabRequests',
+	# 	'tabSchedules',
 
-		'resourceQuery',
-		'identifierQuery',
-		'subscriptionQuery',
-		'batchNotificationQuery',
-		'actionsQuery',
-		'requestsQuery',
-		'schedulesQuery',
-	)
+	# 	'resourceQuery',
+	# 	'identifierQuery',
+	# 	'subscriptionQuery',
+	# 	'batchNotificationQuery',
+	# 	'actionsQuery',
+	# 	'requestsQuery',
+	# 	'schedulesQuery',
+  
+	# 	'conn',
+	# 	'cur',
+	# 	'path',
+	# 	'db2Statics'
+	# 	'db2'
+	# )
 	""" Define slots for instance variables. """
 
-	def __init__(self, path:str, postfix:str) -> None:
+	def __init__(self, path:str, postfix:str,conn) -> None:
 		"""	Initialize the TinyDB binding.
 		
 			Args:
@@ -901,12 +1032,15 @@ class TinyDBBinding(object):
 				postfix: Postfix for the database file names.
 		"""
 		
-		self.path = path
-		""" Path to the database directory. """
+		
 		self._assignConfig()
+		self.conn = conn
+		self.cur = conn.cursor() ##path를 connection으로 수정
+		""" Path to the database directory. """
 		""" Assign configuration values. """
 		L.isInfo and L.log(f'Cache Size: {self.cacheSize:d}')
 
+		self.path = path
 		# create transaction locks
 		self.lockResources				= Lock()
 		""" Lock for the resources table."""
@@ -962,7 +1096,8 @@ class TinyDBBinding(object):
 			""" The TinyDB database for the statistics table."""
 			self.dbActions				= TinyDB(storage = MemoryStorage)
 			""" The TinyDB database for the actions table."""
-			self.dbRequests				= TinyDB(storage = MemoryStorage)
+			self.db2Requests			= "requests"
+			# self.dbRequests				= TinyDB(storage = MemoryStorage)
 			""" The TinyDB database for the requests table."""
 			self.dbSchedules			= TinyDB(storage = MemoryStorage)
 			""" The TinyDB database for the schedules table."""
@@ -976,11 +1111,12 @@ class TinyDBBinding(object):
 			""" The TinyDB database for the subscriptions table."""
 			self.dbBatchNotifications 	= TinyDB(self.fileBatchNotifications, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the batchNotifications table."""
-			self.dbStatistics 			= TinyDB(self.fileStatistics, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
+			self.dbStatistics			= TinyDB(storage = MemoryStorage)
 			""" The TinyDB database for the statistics table."""
 			self.dbActions	 			= TinyDB(self.fileActions, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the actions table."""
-			self.dbRequests	 			= TinyDB(self.fileRequests, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
+			self.db2Requests			= "requests"
+   			# self.dbRequests	 			= TinyDB(self.fileRequests, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the requests table."""
 			self.dbSchedules	 		= TinyDB(self.fileSchedules, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the schedules table."""
@@ -1019,9 +1155,10 @@ class TinyDBBinding(object):
 		""" The TinyDB table for the actions table."""
 		TinyDBBetterTable.assign(self.tabActions)
 
-		self.tabRequests = self.dbRequests.table(_requests, cache_size = self.cacheSize)
+		# self.tabRequests = self.dbRequests.table(_requests, cache_size = self.cacheSize)
+		self.tabRequests = Request(conn,self.db2Requests)
 		""" The TinyDB table for the requests table."""
-		TinyDBBetterTable.assign(self.tabRequests)
+		# TinyDBBetterTable.assign(self.tabRequests)
 
 		self.tabSchedules = self.dbSchedules.table(_schedules, cache_size = self.cacheSize)
 		""" The TinyDB table for the schedules table."""
@@ -1040,7 +1177,7 @@ class TinyDBBinding(object):
 		""" The TinyDB query object for the batchNotifications table."""
 		self.actionsQuery				= Query()
 		""" The TinyDB query object for the actions table."""
-		self.requestsQuery				= Query()
+		# self.requestsQuery				= Query()
 		""" The TinyDB query object for the requests table."""
 		self.schedulesQuery				= Query()
 		""" The TinyDB query object for the schedules table."""
@@ -1576,7 +1713,7 @@ class TinyDBBinding(object):
 
 
 	#
-	#	Statistics
+	#	Statistics[FIX]
 	#
 
 	def searchStatistics(self) -> JSON:
@@ -1754,7 +1891,7 @@ class TinyDBBinding(object):
 
 				#op = request.get('op') if 'op' in request else Operation.NA
 				rsc = response['rsc'] if 'rsc' in response else ResponseStatusCode.UNKNOWN
-
+				
 				# The following removes all None values from the request and response, and the requests structure
 				_doc = {'ri': ri,
 						 'srn': srn,
@@ -1767,9 +1904,10 @@ class TinyDBBinding(object):
 						 'req': { k: v for k, v in request.items() if v is not None }, 
 						 'rsp': { k: v for k, v in response.items() if v is not None }
 					   }
-				self.tabRequests.insert(
-					Document({k: v for k, v in _doc.items() if v is not None}, 
-			    			 self.tabRequests.document_id_class(ts)))	# type:ignore[arg-type]
+				self.tabRequests.insert(_doc)	# type:ignore[arg-type]
+				# self.tabRequests.insert(
+				# 	Document({k: v for k, v in _doc.items() if v is not None}, 
+			    # 			 self.tabRequests.document_id_class(ts)))	# type:ignore[arg-type]
 
 			except Exception as e:
 				L.logErr(f'Exception inserting request/response for ri: {ri}', exc = e)
@@ -1789,7 +1927,7 @@ class TinyDBBinding(object):
 		with self.lockRequests:
 			if not ri:
 				return self.tabRequests.all()
-			return self.tabRequests.search(self.requestsQuery.ri == ri)
+			return self.tabRequests.search(ri)
 
 
 	def deleteRequests(self, ri:Optional[str] = None) -> None:
@@ -1800,7 +1938,7 @@ class TinyDBBinding(object):
 		"""
 		if ri:
 			with self.lockRequests:
-				self.tabRequests.remove(self.requestsQuery.ri == ri)
+				self.tabRequests.remove(ri)
 		else:
 			with self.lockRequests:
 				self.tabRequests.truncate()

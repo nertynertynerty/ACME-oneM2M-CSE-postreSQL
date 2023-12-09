@@ -469,7 +469,6 @@ class TestSUB(unittest.TestCase):
 		dct = 	{ 'm2m:cnt' : {
 					'lbl' : [ '99' ]
 				}}
-		print(cntURL, TestSUB.originator, dct)
 		_, rsc = UPDATE(cntURL, TestSUB.originator, dct)
 		self.assertEqual(rsc, RC.UPDATED)
 		# Delete the sub
@@ -480,9 +479,7 @@ class TestSUB(unittest.TestCase):
 		lastNotification = getLastNotification(wait = notificationDelay)
 		self.assertIsNotNone(findXPath(lastNotification, 'm2m:agn'))
 		self.assertEqual(len(findXPath(lastNotification, 'm2m:agn')), 1)
-		print("ok")
 		self.assertIsNotNone(findXPath(lastNotification, 'm2m:agn/m2m:sgn/{0}/nev/rep/m2m:cnt/lbl'))
-		print("hi")
 		self.assertEqual(findXPath(lastNotification, 'm2m:agn/m2m:sgn/{0}/nev/rep/m2m:cnt/lbl/{0}'), '99')
 
 

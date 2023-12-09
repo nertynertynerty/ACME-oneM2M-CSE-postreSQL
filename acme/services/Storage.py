@@ -937,7 +937,7 @@ class Request(object):
             return [stats]
             
         except :
-            print("error")s
+            print("error")
         return []
     
     def all(self):

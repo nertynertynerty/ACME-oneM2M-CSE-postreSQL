@@ -11,13 +11,13 @@
 
 """	This module defines storage managers and drivers for database access.
 
-	Storage managers are used to store, retrieve and manage resources and other runtime data in the database.
+    Storage managers are used to store, retrieve and manage resources and other runtime data in the database.
 
-	Storage drivers are used to access the database. Currently, the only supported database is TinyDB.
+    Storage drivers are used to access the database. Currently, the only supported database is TinyDB.
 
-	See also:
-		- `TinyDBBetterTable`
-		- `TinyDBBufferedStorage`
+    See also:
+        - `TinyDBBetterTable`
+        - `TinyDBBufferedStorage`
 """
 
 from __future__ import annotations
@@ -47,6 +47,7 @@ from ..services.Logging import Logging as L
 import psycopg2 as db
 from psycopg2 import extras
 import json
+from typing import List, Optional
 
 # Constants for database and table names
 _resources = 'resources'
@@ -339,514 +340,514 @@ class Storage(object):
 		raise INTERNAL_SERVER_ERROR('database inconsistency')
 
 
-	def retrieveResourcesByType(self, ty:ResourceTypes) -> list[Document]:
-		""" Return all resources of a certain type. 
-
-			Args:
-				ty: resource type to retrieve.
-
-			Returns:
-				List of resource *Document* objects	. 
-		"""
-		# L.logDebug(f'Retrieving all resources ty: {ty}')
-		return self.db.searchResources(ty = int(ty))
+    def retrieveResourcesByType(self, ty:ResourceTypes) -> list[Document]:
+        """ Return all resources of a certain type. 
+
+            Args:
+                ty: resource type to retrieve.
+
+            Returns:
+                List of resource *Document* objects	. 
+        """
+        # L.logDebug(f'Retrieving all resources ty: {ty}')
+        return self.db.searchResources(ty = int(ty))
 
 
-	def updateResource(self, resource:Resource) -> Resource:
-		"""	Update a resource in the database.
+    def updateResource(self, resource:Resource) -> Resource:
+        """	Update a resource in the database.
 
-			Args:
-				resource: Resource to update.
+            Args:
+                resource: Resource to update.
 
-			Return:
-				Updated Resource object.
-		"""
-		ri = resource.ri
-		# L.logDebug(f'Updating resource (ty: {resource.ty}, ri: {ri}, rn: {resource.rn})')
-		return self.db.updateResource(resource, ri)
+            Return:
+                Updated Resource object.
+        """
+        ri = resource.ri
+        # L.logDebug(f'Updating resource (ty: {resource.ty}, ri: {ri}, rn: {resource.rn})')
+        return self.db.updateResource(resource, ri)
 
 
-	def deleteResource(self, resource:Resource) -> None:
-		"""	Delete a resource from the database.
+    def deleteResource(self, resource:Resource) -> None:
+        """	Delete a resource from the database.
 
-			Args:
-				resource: Resource to delete.
-			
-			Raises:
-				NOT_FOUND: In case the resource does not exist.
-		"""
-		# L.logDebug(f'Removing resource (ty: {resource.ty}, ri: {resource.ri}, rn: {resource.rn})')
-		try:
-			self.db.deleteResource(resource)
-			self.db.deleteIdentifier(resource)
-			self.db.removeChildResource(resource)
-		except KeyError:
-			raise NOT_FOUND(L.logDebug(f'Cannot remove: {resource.ri} (NOT_FOUND). Could be an expected error.'))
+            Args:
+                resource: Resource to delete.
+            
+            Raises:
+                NOT_FOUND: In case the resource does not exist.
+        """
+        # L.logDebug(f'Removing resource (ty: {resource.ty}, ri: {resource.ri}, rn: {resource.rn})')
+        try:
+            self.db.deleteResource(resource)
+            self.db.deleteIdentifier(resource)
+            self.db.removeChildResource(resource)
+        except KeyError:
+            raise NOT_FOUND(L.logDebug(f'Cannot remove: {resource.ri} (NOT_FOUND). Could be an expected error.'))
 
 
-	def directChildResources(self, pi:str, 
-								   ty:Optional[ResourceTypes|list[ResourceTypes]] = None, 
-								   raw:Optional[bool] = False) -> list[Document]|list[Resource]:
-		"""	Return a list of direct child resources, or an empty list
+    def directChildResources(self, pi:str, 
+                                   ty:Optional[ResourceTypes|list[ResourceTypes]] = None, 
+                                   raw:Optional[bool] = False) -> list[Document]|list[Resource]:
+        """	Return a list of direct child resources, or an empty list
 
-			Args:
-				pi: The parent resource's Resource ID.
-				ty: Optional resource type or list of resource types to filter the result.
-				raw: When "True" then return the child resources as resource dictionary instead of resources.
+            Args:
+                pi: The parent resource's Resource ID.
+                ty: Optional resource type or list of resource types to filter the result.
+                raw: When "True" then return the child resources as resource dictionary instead of resources.
 
-			Returns:
-				Return a list of resources, or a list of raw resource dictionaries.
-		"""
-		if (_ris := self.db.searchChildResourcesByParentRI(pi, ty)):
-			docs = [self.db.searchResources(ri = _ri)[0] for _ri in _ris]
-			return docs if raw else cast(List[Resource], list(map(lambda x: resourceFromDict(x), docs)))
-		return []	# type:ignore[return-value]
-	
+            Returns:
+                Return a list of resources, or a list of raw resource dictionaries.
+        """
+        if (_ris := self.db.searchChildResourcesByParentRI(pi, ty)):
+            docs = [self.db.searchResources(ri = _ri)[0] for _ri in _ris]
+            return docs if raw else cast(List[Resource], list(map(lambda x: resourceFromDict(x), docs)))
+        return []	# type:ignore[return-value]
+    
 
-	def directChildResourcesRI(self, pi:str, 
-			    					 ty:Optional[ResourceTypes|list[ResourceTypes]] = None) -> list[str]:
-		"""	Return a list of direct child resource IDs, or an empty list
+    def directChildResourcesRI(self, pi:str, 
+                                     ty:Optional[ResourceTypes|list[ResourceTypes]] = None) -> list[str]:
+        """	Return a list of direct child resource IDs, or an empty list
 
-			Args:
-				pi: The parent resource's Resource ID.
-				ty: Optional resource type or list of resource types to filter the result.
+            Args:
+                pi: The parent resource's Resource ID.
+                ty: Optional resource type or list of resource types to filter the result.
 
-			Returns:
-				Return a list of resource IDs.
-		"""
-		return self.db.searchChildResourcesByParentRI(pi, ty)
+            Returns:
+                Return a list of resource IDs.
+        """
+        return self.db.searchChildResourcesByParentRI(pi, ty)
 
 
-	def countDirectChildResources(self, pi:str, ty:Optional[ResourceTypes] = None) -> int:
-		"""	Count the number of direct child resources.
+    def countDirectChildResources(self, pi:str, ty:Optional[ResourceTypes] = None) -> int:
+        """	Count the number of direct child resources.
 
-			Args:
-				pi: The parent resource's Resource ID.
-				ty: Optional resource type to filter the result.
+            Args:
+                pi: The parent resource's Resource ID.
+                ty: Optional resource type to filter the result.
 
-			Returns:
-				The number of child resources.
-		"""
-		return len(self.db.searchResources(pi = pi, ty = int(ty) if ty is not None else None))
+            Returns:
+                The number of child resources.
+        """
+        return len(self.db.searchResources(pi = pi, ty = int(ty) if ty is not None else None))
 
 
-	def countResources(self) -> int:
-		"""	Count the overall number of CSE resources.
+    def countResources(self) -> int:
+        """	Count the overall number of CSE resources.
 
-			Returns:
-				The number of CSE resources.
-		"""
-		return self.db.countResources()
+            Returns:
+                The number of CSE resources.
+        """
+        return self.db.countResources()
 
 
-	def identifier(self, ri:str) -> list[Document]:
-		"""	Search for the resource identifer mapping with the given unstructured resource ID.
+    def identifier(self, ri:str) -> list[Document]:
+        """	Search for the resource identifer mapping with the given unstructured resource ID.
 
-			Args:
-				ri: Unstructured resource ID for the mapping to look for.
+            Args:
+                ri: Unstructured resource ID for the mapping to look for.
 
-			Return:
-				List of found resources identifier mappings, or an empty list.
-		"""
-		return self.db.searchIdentifiers(ri = ri)
+            Return:
+                List of found resources identifier mappings, or an empty list.
+        """
+        return self.db.searchIdentifiers(ri = ri)
 
 
-	def structuredIdentifier(self, srn:str) -> list[Document]:
-		"""	Search for the resource identifer mapping with the given structured resource ID.
+    def structuredIdentifier(self, srn:str) -> list[Document]:
+        """	Search for the resource identifer mapping with the given structured resource ID.
 
-			Args:
-				srn: Structured resource ID for the mapping to look for.
-
-			Return:
-				List of found resources identifier mappings, or an empty list.
-		"""
-		return self.db.searchIdentifiers(srn = srn)
+            Args:
+                srn: Structured resource ID for the mapping to look for.
+
+            Return:
+                List of found resources identifier mappings, or an empty list.
+        """
+        return self.db.searchIdentifiers(srn = srn)
 
 
-	def searchByFragment(self, dct:dict, filter:Optional[Callable[[JSON], bool]] = None) -> list[Resource]:
-		""" Search and return all resources that match the given fragment dictionary/document.
+    def searchByFragment(self, dct:dict, filter:Optional[Callable[[JSON], bool]] = None) -> list[Resource]:
+        """ Search and return all resources that match the given fragment dictionary/document.
 
-			Args:
-				dct: A fragment dictionary to use as a filter for the search.
-				filter: An optional callback to provide additional filter functionality.
+            Args:
+                dct: A fragment dictionary to use as a filter for the search.
+                filter: An optional callback to provide additional filter functionality.
 
-			Return:
-				List of `Resource` objects.
-		"""
-		return	[ res	for each in self.db.searchByFragment(dct) 
-						if (not filter or filter(each)) and (res := resourceFromDict(each)) # either there is no filter or the filter is called to test the resource
-				] 
+            Return:
+                List of `Resource` objects.
+        """
+        return	[ res	for each in self.db.searchByFragment(dct) 
+                        if (not filter or filter(each)) and (res := resourceFromDict(each)) # either there is no filter or the filter is called to test the resource
+                ] 
 
 
-	def searchByFilter(self, filter:Callable[[JSON], bool]) -> list[Resource]:
-		"""	Return a list of resources that match the given filter, or an empty list.
+    def searchByFilter(self, filter:Callable[[JSON], bool]) -> list[Resource]:
+        """	Return a list of resources that match the given filter, or an empty list.
 
-			Args:
-				filter: A callback to provide filter functionality.
+            Args:
+                filter: A callback to provide filter functionality.
 
-			Return:
-				List of `Resource` objects.
-		"""
-		return	[ res	for each in self.db.discoverResourcesByFilter(filter)
-						if (res := resourceFromDict(each))
-				]
+            Return:
+                List of `Resource` objects.
+        """
+        return	[ res	for each in self.db.discoverResourcesByFilter(filter)
+                        if (res := resourceFromDict(each))
+                ]
 
 
-	#########################################################################
-	##
-	##	Subscriptions
-	##
-
-	def getSubscription(self, ri:str) -> Optional[Document]:
-		"""	Retrieve a subscription representation (not a oneM2M `Resource` object) from the DB.
-
-			Args:
-				ri: The subscription's resource ID.
-
-			Return:
-				The subscription as a dictionary, or None.
-		"""
-		# L.logDebug(f'Retrieving subscription: {ri}')
-		subs = self.db.searchSubscriptions(ri = ri)
-		if not subs or len(subs) != 1:
-			return None
-		return subs[0]
-
-
-	def getSubscriptionsForParent(self, pi:str) -> list[Document]:
-		"""	Retrieve all subscriptions representations (not oneM2M `Resource` objects) for a parent resource.
-
-			Args:
-				pi: The parent resource's resource ID.
-
-			Return:
-				List of subscriptions.
-		"""
-		# L.logDebug(f'Retrieving subscriptions for parent: {pi}')
-		return self.db.searchSubscriptions(pi = pi)
-
-
-	def addSubscription(self, subscription:Resource) -> bool:
-		"""	Add a subscription to the DB.
-		
-			Args:
-				subscription: The subscription `Resource` to add.
-				
-			Return:	
-				Boolean value to indicate success or failure.
-		"""
-		# L.logDebug(f'Adding subscription: {ri}')
-		return self.db.upsertSubscription(subscription)
-
-
-	def removeSubscription(self, subscription:Resource) -> bool:
-		"""	Remove a subscription from the DB.
-
-			Args:
-				subscription: The subscription `Resource` to remove.
-
-			Return:
-				Boolean value to indicate success or failure.
-			
-			Raises:
-				NOT_FOUND: In case the subscription does not exist.
-		"""
-		# L.logDebug(f'Removing subscription: {subscription.ri}')
-		try:
-			return self.db.removeSubscription(subscription)
-		except KeyError as e:
-			raise NOT_FOUND(L.logDebug(f'Cannot subscription data for: {subscription.ri} (NOT_FOUND). Could be an expected error.'))
-
-
-	def updateSubscription(self, subscription:Resource) -> bool:
-		"""	Update a subscription representation in the DB.
-
-			Args:
-				subscription: The subscription `Resource` to update.
-
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		# L.logDebug(f'Updating subscription: {ri}')
-		return self.db.upsertSubscription(subscription)
-
-
-	#########################################################################
-	##
-	##	BatchNotifications
-	##
-
-	def addBatchNotification(self, ri:str, nu:str, request:JSON) -> bool:
-		"""	Add a batch notification to the DB.
-		
-			Args:
-				ri: The resource ID of the target resource.
-				nu: The notification URI.
-				request: The request to store.
-				
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.addBatchNotification(ri, nu, request)
-
-
-	def countBatchNotifications(self, ri:str, nu:str) -> int:
-		"""	Count the number of batch notifications for a target resource and a notification URI.
-		
-			Args:
-				ri: The resource ID of the target resource.
-				nu: The notification URI.
-				
-			Return:
-				The number of matching batch notifications.
-		"""
-		return self.db.countBatchNotifications(ri, nu)
-
-
-	def getBatchNotifications(self, ri:str, nu:str) -> list[Document]:
-		"""	Retrieve the batch notifications for a target resource and a notification URI.
-		
-			Args:
-				ri: The resource ID of the target resource.
-				nu: The notification URI.
-				
-			Return:
-				List of batch notifications.
-		"""
-		return self.db.getBatchNotifications(ri, nu)
-
-
-	def removeBatchNotifications(self, ri:str, nu:str) -> bool:
-		"""	Remove the batch notifications for a target resource and a notification URI.
-
-			Args:
-				ri: The resource ID of the target resource.
-				nu: The notification URI.
-			
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.removeBatchNotifications(ri, nu)
-
-
-	#########################################################################
-	##
-	##	Statistics
-	##
-
-	def getStatistics(self) -> JSON:
-		"""	Retrieve the statistics data from the DB.
-
-			Return:
-				The statistics data as a JSON dictionary.
-		"""
-		return self.db.searchStatistics()
-
-
-	def updateStatistics(self, stats:JSON) -> bool:
-		"""	Update the statistics DB with new data.
-
-			Args:
-				stats: The statistics data to store.
-
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.upsertStatistics(stats)
-
-
-	def purgeStatistics(self) -> None:
-		"""	Purge the statistics DB.
-
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		self.db.purgeStatistics()
-
-
-	#########################################################################
-	##
-	##	Actions
-	##
-
-	def getActions(self) -> list[Document]:
-		"""	Retrieve all action representations from the DB.
-
-			Return:
-				List of *Documents*. May be empty.
-		"""
-		return self.db.searchActionReprs()
-	
-
-	def getAction(self, ri:str) -> Optional[Document]:
-		"""	Retrieve the actions representation from the DB.
-
-			Args:
-				ri: The action's resource ID.
-
-			Return:
-				The action's data as a *Document*, or None.
-		"""
-		return self.db.getAction(ri)
-
-	
-	def searchActionsForSubject(self, ri:str) -> Sequence[JSON]:
-		"""	Search for actions for a subject resource.
-		
-			Args:
-				ri: The subject resource's resource ID.
-			
-			Return:
-				List of matching action representations.
-		"""
-		return self.db.searchActionsDeprsForSubject(ri)
-
-
-	def updateAction(self, action:ACTR, period:float, count:int) -> bool:
-		"""	Update or add an action representation in the DB.
-		
-			Args:
-				action: The action to update or insert.
-				period: The period for the action.
-				count: The run count for the action.
-
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.upsertActionRepr(action, period, count)
-
-
-	def updateActionRepr(self, actionRepr:JSON) -> bool:
-		"""	Update an action representation in the DB.
-		
-			Args:
-				actionRepr: The action representation to update.
-
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.updateActionRepr(actionRepr)
-
-
-	def removeAction(self, ri:str) -> bool:
-		"""	Remove an action representation from the DB.
-		
-			Args:
-				ri: The action's resource ID.
-
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.removeActionRepr(ri)
-
-
-	#########################################################################
-	##
-	##	Requests
-	##
-
-	def addRequest(self, op:Operation, 
-						 ri:str, 
-						 srn:str, 
-						 originator:str, 
-						 outgoing:bool, 
-						 ot:str,
-						 request:JSON, 
-						 response:JSON) -> bool:
-		"""	Add a request to the *requests* database.
-		
-			Args:
-				op: Operation.
-				ri: Resource ID of a request's target resource.
-				srn: Structured resource ID of a request's target resource.
-				originator: Request originator.
-				outgoing: If true, then this is a request sent by the CSE.
-				ot: Request creation time.
-				request: The request to store.
-				response: The response to store.
-			
-			Return:
-				Boolean value to indicate success or failure.
-			"""
-		return self.db.insertRequest(op, ri, srn, originator, outgoing, ot, request, response)
-
-
-	def getRequests(self, ri:Optional[str] = None, sortedByOt:bool = False) -> list[Document]:
-		"""	Get requests for a resource ID, or all requests.
-		
-			Args:
-				ri: The target resource's resource ID. If *None* or empty, then all requests are returned
-				sortedByOt: If true, then the requests are sorted by their creation time.
-			
-			Return:
-				List of *Documents*. May be empty.
-		"""
-
-		if sortedByOt:
-			return sorted(self.db.getRequests(ri), key = lambda x: x['ot'])
-		return self.db.getRequests(ri)
-	
-
-	def deleteRequests(self, ri:Optional[str] = None) -> None:
-		"""	Delete all requests from the database.
-
-			Args:
-				ri: Optional resouce ID. Only requests for this resource ID will be deleted.
-		"""
-		return self.db.deleteRequests(ri)
-
-
-	#########################################################################
-	##
-	##	Schedules
-	##
-
-	def getSchedules(self) -> list[Document]:
-		"""	Retrieve the schedules data from the DB.
-
-			Return:
-				List of *Documents*. May be empty.
-		"""
-		return self.db.getSchedules()
-
-
-	def searchScheduleForTarget(self, pi:str) -> list[str]:
-		"""	Search for schedules for a target resource.
-
-			Args:
-				pi: The target resource's resource ID.
-			
-			Return:
-				List of schedule resource IDs.
-		"""
-		result = []
-		for s in self.db.searchSchedules(pi):
-			result.extend(s['sce'])
-		return result
-
-
-	def upsertSchedule(self, schedule:SCH) -> bool:
-		"""	Add or update a schedule in the DB.
-
-			Args:
-				schedule: The schedule to add or update.
-
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.upsertSchedule(schedule.ri, schedule.pi, schedule.attribute('se/sce'))
-
-
-	def removeSchedule(self, schedule:SCH) -> bool:
-		"""	Remove a schedule from the DB.
-
-			Args:
-				schedule: The schedule to remove.
-			
-			Return:
-				Boolean value to indicate success or failure.
-		"""
-		return self.db.removeSchedule(schedule.ri)
+    #########################################################################
+    ##
+    ##	Subscriptions
+    ##
+
+    def getSubscription(self, ri:str) -> Optional[Document]:
+        """	Retrieve a subscription representation (not a oneM2M `Resource` object) from the DB.
+
+            Args:
+                ri: The subscription's resource ID.
+
+            Return:
+                The subscription as a dictionary, or None.
+        """
+        # L.logDebug(f'Retrieving subscription: {ri}')
+        subs = self.db.searchSubscriptions(ri = ri)
+        if not subs or len(subs) != 1:
+            return None
+        return subs[0]
+
+
+    def getSubscriptionsForParent(self, pi:str) -> list[Document]:
+        """	Retrieve all subscriptions representations (not oneM2M `Resource` objects) for a parent resource.
+
+            Args:
+                pi: The parent resource's resource ID.
+
+            Return:
+                List of subscriptions.
+        """
+        # L.logDebug(f'Retrieving subscriptions for parent: {pi}')
+        return self.db.searchSubscriptions(pi = pi)
+
+
+    def addSubscription(self, subscription:Resource) -> bool:
+        """	Add a subscription to the DB.
+        
+            Args:
+                subscription: The subscription `Resource` to add.
+                
+            Return:	
+                Boolean value to indicate success or failure.
+        """
+        # L.logDebug(f'Adding subscription: {ri}')
+        return self.db.upsertSubscription(subscription)
+
+
+    def removeSubscription(self, subscription:Resource) -> bool:
+        """	Remove a subscription from the DB.
+
+            Args:
+                subscription: The subscription `Resource` to remove.
+
+            Return:
+                Boolean value to indicate success or failure.
+            
+            Raises:
+                NOT_FOUND: In case the subscription does not exist.
+        """
+        # L.logDebug(f'Removing subscription: {subscription.ri}')
+        try:
+            return self.db.removeSubscription(subscription)
+        except KeyError as e:
+            raise NOT_FOUND(L.logDebug(f'Cannot subscription data for: {subscription.ri} (NOT_FOUND). Could be an expected error.'))
+
+
+    def updateSubscription(self, subscription:Resource) -> bool:
+        """	Update a subscription representation in the DB.
+
+            Args:
+                subscription: The subscription `Resource` to update.
+
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        # L.logDebug(f'Updating subscription: {ri}')
+        return self.db.upsertSubscription(subscription)
+
+
+    #########################################################################
+    ##
+    ##	BatchNotifications
+    ##
+
+    def addBatchNotification(self, ri:str, nu:str, request:JSON) -> bool:
+        """	Add a batch notification to the DB.
+        
+            Args:
+                ri: The resource ID of the target resource.
+                nu: The notification URI.
+                request: The request to store.
+                
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.addBatchNotification(ri, nu, request)
+
+
+    def countBatchNotifications(self, ri:str, nu:str) -> int:
+        """	Count the number of batch notifications for a target resource and a notification URI.
+        
+            Args:
+                ri: The resource ID of the target resource.
+                nu: The notification URI.
+                
+            Return:
+                The number of matching batch notifications.
+        """
+        return self.db.countBatchNotifications(ri, nu)
+
+
+    def getBatchNotifications(self, ri:str, nu:str) -> list[Document]:
+        """	Retrieve the batch notifications for a target resource and a notification URI.
+        
+            Args:
+                ri: The resource ID of the target resource.
+                nu: The notification URI.
+                
+            Return:
+                List of batch notifications.
+        """
+        return self.db.getBatchNotifications(ri, nu)
+
+
+    def removeBatchNotifications(self, ri:str, nu:str) -> bool:
+        """	Remove the batch notifications for a target resource and a notification URI.
+
+            Args:
+                ri: The resource ID of the target resource.
+                nu: The notification URI.
+            
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.removeBatchNotifications(ri, nu)
+
+
+    #########################################################################
+    ##
+    ##	Statistics
+    ##
+
+    def getStatistics(self) -> JSON:
+        """	Retrieve the statistics data from the DB.
+
+            Return:
+                The statistics data as a JSON dictionary.
+        """
+        return self.db.searchStatistics()
+
+
+    def updateStatistics(self, stats:JSON) -> bool:
+        """	Update the statistics DB with new data.
+
+            Args:
+                stats: The statistics data to store.
+
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.upsertStatistics(stats)
+
+
+    def purgeStatistics(self) -> None:
+        """	Purge the statistics DB.
+
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        self.db.purgeStatistics()
+
+
+    #########################################################################
+    ##
+    ##	Actions
+    ##
+
+    def getActions(self) -> list[Document]:
+        """	Retrieve all action representations from the DB.
+
+            Return:
+                List of *Documents*. May be empty.
+        """
+        return self.db.searchActionReprs()
+    
+
+    def getAction(self, ri:str) -> Optional[Document]:
+        """	Retrieve the actions representation from the DB.
+
+            Args:
+                ri: The action's resource ID.
+
+            Return:
+                The action's data as a *Document*, or None.
+        """
+        return self.db.getAction(ri)
+
+    
+    def searchActionsForSubject(self, ri:str) -> Sequence[JSON]:
+        """	Search for actions for a subject resource.
+        
+            Args:
+                ri: The subject resource's resource ID.
+            
+            Return:
+                List of matching action representations.
+        """
+        return self.db.searchActionsDeprsForSubject(ri)
+
+
+    def updateAction(self, action:ACTR, period:float, count:int) -> bool:
+        """	Update or add an action representation in the DB.
+        
+            Args:
+                action: The action to update or insert.
+                period: The period for the action.
+                count: The run count for the action.
+
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.upsertActionRepr(action, period, count)
+
+
+    def updateActionRepr(self, actionRepr:JSON) -> bool:
+        """	Update an action representation in the DB.
+        
+            Args:
+                actionRepr: The action representation to update.
+
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.updateActionRepr(actionRepr)
+
+
+    def removeAction(self, ri:str) -> bool:
+        """	Remove an action representation from the DB.
+        
+            Args:
+                ri: The action's resource ID.
+
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.removeActionRepr(ri)
+
+
+    #########################################################################
+    ##
+    ##	Requests
+    ##
+
+    def addRequest(self, op:Operation, 
+                         ri:str, 
+                         srn:str, 
+                         originator:str, 
+                         outgoing:bool, 
+                         ot:str,
+                         request:JSON, 
+                         response:JSON) -> bool:
+        """	Add a request to the *requests* database.
+        
+            Args:
+                op: Operation.
+                ri: Resource ID of a request's target resource.
+                srn: Structured resource ID of a request's target resource.
+                originator: Request originator.
+                outgoing: If true, then this is a request sent by the CSE.
+                ot: Request creation time.
+                request: The request to store.
+                response: The response to store.
+            
+            Return:
+                Boolean value to indicate success or failure.
+            """
+        return self.db.insertRequest(op, ri, srn, originator, outgoing, ot, request, response)
+
+
+    def getRequests(self, ri:Optional[str] = None, sortedByOt:bool = False) -> list[Document]:
+        """	Get requests for a resource ID, or all requests.
+        
+            Args:
+                ri: The target resource's resource ID. If *None* or empty, then all requests are returned
+                sortedByOt: If true, then the requests are sorted by their creation time.
+            
+            Return:
+                List of *Documents*. May be empty.
+        """
+
+        if sortedByOt:
+            return sorted(self.db.getRequests(ri), key = lambda x: x['ot'])
+        return self.db.getRequests(ri)
+    
+
+    def deleteRequests(self, ri:Optional[str] = None) -> None:
+        """	Delete all requests from the database.
+
+            Args:
+                ri: Optional resouce ID. Only requests for this resource ID will be deleted.
+        """
+        return self.db.deleteRequests(ri)
+
+
+    #########################################################################
+    ##
+    ##	Schedules
+    ##
+
+    def getSchedules(self) -> list[Document]:
+        """	Retrieve the schedules data from the DB.
+
+            Return:
+                List of *Documents*. May be empty.
+        """
+        return self.db.getSchedules()
+
+
+    def searchScheduleForTarget(self, pi:str) -> list[str]:
+        """	Search for schedules for a target resource.
+
+            Args:
+                pi: The target resource's resource ID.
+            
+            Return:
+                List of schedule resource IDs.
+        """
+        result = []
+        for s in self.db.searchSchedules(pi):
+            result.extend(s['sce'])
+        return result
+
+
+    def upsertSchedule(self, schedule:SCH) -> bool:
+        """	Add or update a schedule in the DB.
+
+            Args:
+                schedule: The schedule to add or update.
+
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.upsertSchedule(schedule.ri, schedule.pi, schedule.attribute('se/sce'))
+
+
+    def removeSchedule(self, schedule:SCH) -> bool:
+        """	Remove a schedule from the DB.
+
+            Args:
+                schedule: The schedule to remove.
+            
+            Return:
+                Boolean value to indicate success or failure.
+        """
+        return self.db.removeSchedule(schedule.ri)
 
 #########################################################################
 #
@@ -1111,7 +1112,7 @@ class TinyDBBinding(object):
 			""" The TinyDB database for the subscriptions table."""
 			self.dbBatchNotifications 	= TinyDB(self.fileBatchNotifications, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the batchNotifications table."""
-			self.dbStatistics			= TinyDB(storage = MemoryStorage)
+            self.dbStatistics 			= TinyDB(self.fileStatistics, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the statistics table."""
 			self.dbActions	 			= TinyDB(self.fileActions, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
 			""" The TinyDB database for the actions table."""
@@ -1181,7 +1182,37 @@ class TinyDBBinding(object):
 		""" The TinyDB query object for the requests table."""
 		self.schedulesQuery				= Query()
 		""" The TinyDB query object for the schedules table."""
+        self.init()
+        self.dbSche()
+        self.db_close()
+        
 
+    @classmethod
+    def init(cls):
+        global conn, cur
+        conn = db.connect(host="localhost", dbname='test_db',
+                        user="postgres", password="1234")
+        cur = conn.cursor()
+
+    @classmethod
+    def db_close(cls):
+        cur.close()
+        conn.close()
+
+    @classmethod
+    def dbSche(cls):
+        cur.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS Schedules (
+                ri VARCHAR(150) NOT NULL UNIQUE,
+                pi VARCHAR(150) NOT NULL,
+                sce VARCHAR(150)[] NOT NULL,
+                nco BOOLEAN
+            );
+            """
+        )
+        conn.commit()
+        
 
 	def _assignConfig(self) -> None:
 		"""	Assign default configurations.
@@ -1944,72 +1975,54 @@ class TinyDBBinding(object):
 				self.tabRequests.truncate()
 
 	#
-	#	Schedules
-	#
+    #	Schedules[FIX]
+    #
 
-	def getSchedules(self) -> list[Document]:
-		"""	Get all schedules from the database.
-		
-			Return:
-				List of *Documents*. May be empty.
-		"""
-		with self.lockSchedules:
-			return self.tabSchedules.all()
+    def getSchedules(self) -> list[dict]:
+        self.init()
+        with self.lockSchedules:
+            cur.execute("SELECT * FROM Schedules;")
+            rows = cur.fetchall()
+            result = [{"ri": row[0], "pi": row[1], "sce": row[2]} for row in rows]
+            self.db_close()
+            return result
 
+    def getSchedule(self, ri: str) -> Optional[dict]:
+        self.init()
+        with self.lockSchedules:
+            cur.execute("SELECT * FROM Schedules WHERE ri = %s;", (ri,))
+            row = cur.fetchone()
+            result = {"ri": row[0], "pi": row[1], "sce": row[2]} if row else None
+            self.db_close()
+            return result
 
-	def getSchedule(self, ri:str) -> Optional[Document]:
-		"""	Get a schedule from the database.
-		
-			Args:
-				ri: The resource ID of the schedule.
+    def searchSchedules(self, pi: str) -> list[dict]:
+        self.init()
+        with self.lockSchedules:
+            cur.execute("SELECT * FROM Schedules WHERE pi = %s;", (pi,))
+            rows = cur.fetchall()
+            result = [{"ri": row[0], "pi": row[1], "sce": row[2]} for row in rows]
+            self.db_close()
+            return result
 
-			Return:
-				The schedule, or *None* if not found.
-		"""
-		with self.lockSchedules:
-			return self.tabSchedules.get(doc_id = ri)	# type:ignore[arg-type, return-value]
-	
+    def upsertSchedule(self, ri: str, pi: str, sce: list[str]) -> bool:
+        self.init()
+        with self.lockSchedules:
+            try:
+                cur.execute("INSERT INTO Schedules (ri, pi, sce) VALUES (%s, %s, %s) ON CONFLICT (ri) DO UPDATE SET pi = EXCLUDED.pi, sce = EXCLUDED.sce;", (ri, pi, sce))
+                conn.commit()
+                self.db_close()
+                return True
+            except Exception as e:
+                conn.rollback()
+                self.db_close()
+                return False
 
-	def searchSchedules(self, pi:str) -> list[Document]:
-		"""	Search for schedules in the database.
-		
-			Args:
-				pi: The resource ID of the parent resource.
-			
-			Return:
-				List of *Documents*. May be empty.
-		"""
-		with self.lockSchedules:
-			return self.tabSchedules.search(self.schedulesQuery.pi == pi)
-	
-
-	def upsertSchedule(self, ri:str, pi:str, schedule:list[str]) -> bool:
-		"""	Add or update a schedule in the database.
-		
-			Args:
-				ri: The resource ID of the schedule.
-				pi: The resource ID of the schedule's parent resource.
-				schedule: The schedule to store.
-			
-			Return:
-				True if the schedule was added or updated, False otherwise.
-		"""
-		with self.lockSchedules:
-			return self.tabSchedules.upsert(Document(
-						{ 'ri': ri,
-						  'pi': pi,
-						  'sce': schedule }, 
-						ri)) is not None	# type:ignore[arg-type]
-
-
-	def removeSchedule(self, ri:str) -> bool:
-		"""	Remove a schedule from the database.
-		
-			Args:
-				ri: The resource ID of the schedule to remove.
-
-			Return:
-				True if the schedule was removed, False otherwise.
-		"""
-		with self.lockSchedules:
-			return len(self.tabSchedules.remove(doc_ids = [ri])) > 0	# type:ignore[arg-type, list-item]
+    def removeSchedule(self, ri: str) -> bool:
+        self.init()
+        with self.lockSchedules:
+            cur.execute("DELETE FROM Schedules WHERE ri = %s;", (ri,))
+            affected_rows = cur.rowcount
+            conn.commit()
+            self.db_close()
+            return affected_rows > 0

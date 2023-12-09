@@ -1082,7 +1082,7 @@ def findXPath(dct:JSON, key:str, default:Any=None) -> Any:
 		Example: findXPath(resource, '{*}/rn') 
 
 	"""
-
+	print(f"dict: {dct}")
 	if not key or not dct:
 		return default
 	if key in dct:
@@ -1125,6 +1125,7 @@ def findXPath(dct:JSON, key:str, default:Any=None) -> Any:
 			return default
 		else:
 			data = data[pathElement]	# found data for the next level down
+	print(f"result: {data}")
 	return data
 
 

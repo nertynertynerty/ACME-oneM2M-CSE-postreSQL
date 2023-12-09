@@ -1264,18 +1264,12 @@ class NotificationManager(object):
 		# Get the subscription information (not the <sub> resource itself!).
 		# Then get all the URIs/notification targets from that subscription. They might already
 		# be filtered.
-		try:
-			if sub := CSE.storage.getSubscription(ri):
-				ln = sub['ln'] if 'ln' in sub else False
-				print("flushresult")
-				print(sub)
-				for nu in sub['nus']:
-					print(nu)
-					self._stopNotificationBatchWorker(ri, nu)					# Stop a potential worker for that particular batch
-					self._sendSubscriptionAggregatedBatchNotification(ri, nu, ln, sub)	# Send all remaining notifications
-		except Exception as e:
-			print(e)
-		print("done")
+		if sub := CSE.storage.getSubscription(ri):
+			ln = sub['ln'] if 'ln' in sub else False
+			for nu in sub['nus']:
+				self._stopNotificationBatchWorker(ri, nu)						# Stop a potential worker for that particular batch
+				self._sendSubscriptionAggregatedBatchNotification(ri, nu, ln, sub)	# Send all remaining notifications
+
 
 	def _storeBatchNotification(self, nu:str, sub:JSON, notificationRequest:JSON) -> bool:
 		"""	Store a subscription's notification for later sending. For a single nu.

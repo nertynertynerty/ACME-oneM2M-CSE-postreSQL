@@ -1,18 +1,0 @@
-
-[ACME] 2023.10.1 - An open source CSE Middleware for Education
-
-
-Creating a new [ACME] configuration file
-
-You may press CTRL-C at any point to cancel the configuration.
-
-Basic configuration
-
-? Select the target environment: 
-❯ Development  - Enable development, testing, and debugging support
-  Introduction - Install extra demo resources, documentation, and scripts
-  Regular      - Disable development features
-  Headless     - Like "regular", plus disable most screen output, and the conso                                                                               l
-  WSGI         - Like "regular", but enable a WSGI server instead of the built-                                                                               i
-Run the CSE for development, for learning, regular operation, or in headless mo                                                                               d
-e.                                 

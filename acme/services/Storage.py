@@ -45,28 +45,8 @@ from ..resources.Factory import resourceFromDict
 from ..services.Logging import Logging as L
 
 import psycopg2 as db
-
-# host = "localhost"
-# port = 5432
-# database = "test_db"
-# user = "test"
-# password = "test"
-
-# conn = db.connect(
-# 	host=host, port=port, database=database, user=user, password=password
-# )
-
-# cursor = conn.cursor(cursor_factory=extras.DictCursor)
-
-
-# conn = psycopg2.connect(
-#     dbname="ACME", 
-#     user="leeminjea", 
-#     password="leeminjea", 
-#     host="localhost",
-# )
-
-# cursor = conn.cursor()
+from psycopg2 import extras
+import json
 
 # Constants for database and table names
 _resources = 'resources'
@@ -98,7 +78,13 @@ class Storage(object):
     # 	'dbPath',
     # 	'dbReset',
     # 	'db',
+  
+    # 	'conn',
+    # 	'cur',
+    # 	'tmp'
+    # 	'db2'
     # )
+ 
     """ Define slots for instance variables. """
 
     def __init__(self) -> None:
@@ -107,9 +93,10 @@ class Storage(object):
             Raises:
                 RuntimeError: In case of an error during initialization.
         """
-
-        # create data directory
         self._assignConfig()
+    
+        # create data directory
+        
         host = "localhost"
         port = 5432
         database = "test_db"
@@ -120,8 +107,7 @@ class Storage(object):
             host=host, port=port, database=database, user=user, password=password
         )
 
-        # self.cursor = self.conn.cursor(cursor_factory=extras.DictCursor)
-        self.cursor = self.conn.cursor()
+        self.cur = self.conn.cursor(cursor_factory=extras.DictCursor)
 
         if not self.inMemory:
             if self.dbPath:
@@ -131,7 +117,7 @@ class Storage(object):
                 raise RuntimeError(L.logErr('database.path not set'))
 
         # create DB object and open DB
-        self.db = TinyDBBinding(self.dbPath, CSE.cseCsi[1:], self.conn) # add CSE CSI as postfix
+        self.db = TinyDBBinding(self.dbPath, CSE.cseCsi[1:],self.conn) # add CSE CSI as postfix
         """ The database object. """
 
         # Reset dbs?
@@ -148,6 +134,7 @@ class Storage(object):
             raise RuntimeError('DB Error')
 
         L.isInfo and L.log('Storage initialized')
+
 
 
     def shutdown(self) -> bool:
@@ -351,18 +338,6 @@ class Storage(object):
 
         raise INTERNAL_SERVER_ERROR('database inconsistency')
 
-
-    def retrieveResourcesByType(self, ty:ResourceTypes) -> list[Document]:
-        """ Return all resources of a certain type. 
-
-            Args:
-                ty: resource type to retrieve.
-
-            Returns:
-                List of resource *Document* objects	. 
-        """
-        # L.logDebug(f'Retrieving all resources ty: {ty}')
-        return self.db.searchResources(ty = int(ty))
 
 
     def updateResource(self, resource:Resource) -> Resource:
@@ -864,6 +839,510 @@ class Storage(object):
 
 #########################################################################
 #
+#	nertynerty CLASS
+#
+#	This class may be moved later to an own module.
+
+class Request(object):
+    def __init__(self,path:str,dbname:str):
+        self.conn = path
+        self.cur = path.cursor()
+        self.db2name = dbname
+        self.cur.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS {self.db2name}  (
+                ri VARCHAR(255),
+                srn VARCHAR(255),
+                ts FLOAT,
+                org VARCHAR(255),
+                op INTEGER,
+                rsc INTEGER,
+                out BOOLEAN,
+                ot VARCHAR(255),
+                req JSON,
+                rsp JSON,
+                PRIMARY KEY(ts)
+            );
+            """
+        )
+        self.conn.commit()
+        
+    def insert(self,stats:JSON) -> int:
+        query = """
+                INSERT INTO requests (ri, srn, ts, org, op, rsc, out, ot, req, rsp)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+            """
+        data = (stats['ri'], stats['srn'], stats['ts'], stats['org'], stats['op'], stats['rsc'], stats['out'], stats['ot'], json.dumps(stats['req']), json.dumps(stats['rsp']))
+        try:
+            self.cur.mogrify(query, data)
+            self.cur.execute(query, data)
+            self.conn.commit()
+        except db.DatabaseError as db_err:
+            print("error")
+            print(db_err)
+        print(stats)
+        stats = stats['ts']
+        return stats
+    
+    def remove(self, ri:str)->None:
+        """
+        Remnove all stord requests from the database.
+        """
+        sql = f'DELETE FROM {self.db2name} WHERE ri={ri}'
+        
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except :
+            print("error")
+            
+    def truncate(self)->None:
+        """
+        Truncate the table by removing all documents.
+        """
+        # 다 없애는 것이라 하여 다 없애봄
+        sql = f'truncate table {self.db2name}'
+        
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except :
+            print("error")
+    
+    def search(self, ri:str)->list:
+        sql = f"SELECT row_to_json({self.db2name}) FROM {self.db2name} WHERE ri={ri}"
+        try:
+            self.cur.execute(sql)
+            stats = self.cur.fetchall()
+            
+            return [stats]
+            
+        except :
+            print("error")
+        # print(stats)
+        return []
+    
+    def all(self):
+        sql =f"SELECT row_to_json({self.db2name}) from {self.db2name}"
+        try:
+            self.cur.execute(sql)
+            stats = self.cur.fetchall()
+        
+            # tmps=[]
+            # tmp={}
+            # for i in stats:
+            #     for j,k in dict.items(i[0]):
+            #         tmp[j] = k
+            #     tmps.append(tmp)
+            stats = [stats]
+        
+        except Exception as e:
+            stats = []
+        return stats
+
+#########################################################################
+#
+#	KS CLASS
+#
+#	This class may be moved later to an own module.
+
+class Statistics(object):
+    def __init__(self,path:str,dbname:str):
+        self.conn = path
+        self.cur = path.cursor()
+        self.db2name = dbname
+        self.doc_id = 1
+        self.cur.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS {self.db2name}  (
+                ID varchar(100) UNIQUE,
+                rmRes FLOAT,
+                crRes FLOAT,
+                upRes FLOAT,
+                exRes FLOAT,
+                notif FLOAT,
+                htRet FLOAT,
+                htCre FLOAT,
+                htUpd FLOAT,
+                htDel FLOAT,
+                htNot FLOAT,
+                htSRt FLOAT,
+                htSCr FLOAT,
+                htSUp FLOAT,
+                htSDl FLOAT,
+                htSNo FLOAT,
+                mqRet FLOAT,
+                mqCre FLOAT,
+                mqUpd FLOAT,
+                mqDel FLOAT,
+                mqNot FLOAT,
+                mqSRt FLOAT,
+                mqSCr FLOAT,
+                mqSUp FLOAT,
+                mqSDl FLOAT,
+                mqSNo FLOAT,
+                cseSU FLOAT,
+                lgErr FLOAT,
+                lgWrn FLOAT                
+            );
+            """
+        )
+        self.conn.commit()
+       
+    def update(self,stats:JSON,doc_ids:int = None):
+        sql = f"UPDATE {self.db2name} SET "
+        for i,j in dict.items(stats):
+            sql+=f"{i} = {j}, "
+        sql = sql[:-2]
+        sql +=f" where id='{doc_ids}'"
+        print(sql)
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+            stats = self.search({"id":f"{doc_ids}"})
+        except db.DatabaseError as db_err:
+            stats = []
+            print("error")
+            print(db_err)
+            
+        #doc_id 삭제
+        return stats
+        
+    def insert(self,stats:JSON) -> int:
+        tmp = {"id":self.doc_id}
+        self.doc_id+=1
+        tmp.update(stats)
+        stats = tmp
+        
+        sql = f"INSERT INTO {self.db2name} ("
+        for i,j in dict.items(stats):
+            sql+=f"{i}, "
+        sql = sql[:-2]
+        sql+=") VALUES ("
+        
+        for i,j in dict.items(stats):
+            sql+=f"{j}, "
+        sql = sql[:-2]
+        sql+=")"
+        print(sql)
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except db.DatabaseError as db_err:
+            print("error")
+            print(db_err)
+        print(stats)
+        stats = stats['id']
+        return stats
+    
+    def truncate(self)->None:
+        """
+        Truncate the table by removing all documents.
+        """
+        # 다 없애는 것이라 하여 다 없애봄
+        sql = f'truncate table {self.db2name}'
+        
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except :
+            print("error")
+    
+    def all(self):
+        sql =f"select row_to_json({self.db2name}) from {self.db2name}"
+        try:
+            self.cur.execute(sql)
+            stats = self.cur.fetchall()
+        
+            tmps=[]
+            tmp={}
+            for i in stats:
+                for j,k in dict.items(i[0]):
+                    tmp[j] = k
+                tmps.append(tmp)
+            stats = tmps
+        
+        except Exception as e:
+            stats = []
+        return stats
+
+
+class Subscriptions(object):
+    def __init__(self,path:str,dbname:str):
+        self.conn = path
+        self.cur = path.cursor()
+        self.db2name = dbname
+        self.doc_id=1
+        self.cur.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS {self.db2name}  (
+                ID varchar(100) UNIQUE,
+                ri varchar(100),
+                pi varchar(100),
+                nct INT,
+                net INT[],
+                atr varchar(100)[],
+                chty INT[],
+                exc INT,
+                ln boolean,
+                nus varchar(100)[],
+                bn JSON,
+                cr varchar(100),
+                nec INT,
+                org varchar(100),
+                ma TIME,
+                nse boolean    
+            );
+            """
+        )
+        self.conn.commit()
+   
+    #cond 추가 작업이 필요함
+    def get(self,cond=None,doc_id=None,doc_ids=None):
+        print(f"get data {cond}, {doc_id}, {doc_ids}")
+        sql = f"select row_to_json({self.db2name}) from {self.db2name} where "
+        if doc_id is not None:
+            sql+=f"id = '{doc_id}'"
+        elif doc_id is not None:
+            for i in doc_ids:
+                sql+=f"id = '{doc_id}' or "
+            sql = sql[:-3]
+            
+        elif cond is not None:
+            print("Need to Develop")
+        else:
+            print("error")
+            
+        try:
+            self.cur.execute(sql)
+            stats = self.cur.fetchall()
+            
+            tmps=[]
+            tmp={}
+            for i in stats:
+                for j,k in dict.items(i[0]):
+                    tmp[j] = k
+                tmps.append(tmp)
+            stats = tmps[0] if len(tmps)==1 else tmps
+        except db.DatabaseError as db_err:
+            stats = None
+            print(db_err)
+        except Exception as e:
+            print(e)
+            stats = None
+                    
+        return stats
+
+    def update(self,stats,cond =None, doc_ids:int = None):
+        print("update")
+  
+        # if doc_ids:
+        # 	tmp = {"id":doc_ids}
+        # else:
+        try:
+            tmp = {"id":stats['ri']}
+        except:
+            tmp = {"id":self.doc_id}
+
+        self.doc_id+=1
+        tmp.update(stats)
+        stats = tmp
+  
+        sql = f"UPDATE {self.db2name} SET "
+        try:
+            for i,j in dict.items(stats):
+                if j is None:
+                    continue
+                elif isinstance(j,str):
+                    j = f"'{j}'"
+                elif isinstance(j,list): 
+                    j = f"ARRAY {j}" 
+                elif isinstance(j,dict):
+                    j = json.dumps(j).replace("'",'"')
+                    print(f"dict: {j}")
+                    j = f"'{j}'"
+                elif isinstance(j,bool):
+                    j = str(j)
+                    print(j)
+                elif isinstance(j,int):
+                    print(f"int: {j} ")
+                    try:
+                        j = int(j)
+                    except:
+                        j = j
+                    print(f"The value is: {j}")
+                else:
+                    print("type error: {j}")
+                    j = 1
+                sql+=f"{i} = {j}, "
+        except Exception as e:
+            print(f"error: {e}")
+        sql = sql[:-2]		
+        
+        sql +=f" where id='{doc_ids}'"
+        print(sql)
+        try:
+            self.cur.execute(sql)
+            stats = self.search({"id":f"{doc_ids}"}) ##수정
+        except Exception as e:
+            stats = []
+            print(e)
+   
+        #doc_id 삭제
+        return stats
+        
+    def insert(self,stats:JSON) -> int:
+        print(f"bn:{stats['bn']}")
+        try:
+            tmp = {"id":stats['ri']}
+        except:
+            tmp = {"id":self.doc_id}
+        self.doc_id+=1
+        tmp.update(stats)
+        stats = tmp
+
+        sql = f"INSERT INTO {self.db2name} ("
+        for i,j in dict.items(stats):
+            if j is None: continue
+            sql+=f"{i}, "
+        sql = sql[:-2]
+        sql+=") VALUES ("
+
+        for i,j in dict.items(stats):
+            if j is None: continue
+            elif isinstance(j,str):
+                j = f"'{j}'"
+            elif isinstance(j,list): 
+                j = f"ARRAY {j}" 
+            elif isinstance(j,dict):
+                j = json.dumps(j).replace("'",'"')
+                print(j)
+                j = f"'{j}'"
+            elif isinstance(j,bool):
+                j = str(j)
+                print(j)
+            elif isinstance(j,int):
+                print(j)
+                try:
+                    j = int(j)
+                except:
+                    j = j
+        
+            else:
+                print(f"error->{j}")
+                j = 1
+            
+            sql+=f"{j}, "
+        sql = sql[:-2]
+        sql+=")"
+        print(sql)
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except db.DatabaseError as db_err:
+            print("error")
+            print(db_err)
+        stats = stats['id']
+        return stats
+    
+    def truncate(self)->None:
+        print("truncate")
+        """
+        Truncate the table by removing all documents.
+        """
+        # 다 없애는 것이라 하여 다 없애봄
+        sql = f'truncate table {self.db2name}'
+        
+        try:
+            self.cur.execute(sql)
+            self.conn.commit()
+        except :
+            print("error")
+    
+    def search(self, keyword:JSON)-> List[Document]:
+        print("search")
+        sql = f"SELECT row_to_json({self.db2name}) from {self.db2name} where "
+        for i,j in dict.items(keyword):
+            sql+= f"{i}='{j}' and "
+        sql = sql[:-4]
+        print(sql)
+        try:
+            self.cur.execute(sql)
+            stats = self.cur.fetchall()
+            
+            tmps=[]
+            tmp={}
+            for i in stats:
+                for j,k in dict.items(i[0]):
+                    tmp[j] = k
+                tmps.append(tmp)
+            stats = tmps
+            
+        except db.DatabaseError as err:
+            print("error")
+            print(err)
+        except Exception as e:
+            print("just error")
+            print(e)
+        print(f"search_result:{stats}")
+        return stats
+      
+    def upsert(self,stats,cond=None)->list:
+        print("data")
+        
+        print(stats)
+        try:
+            doc_id = stats['id']
+        except:
+            doc_id = stats['ri']
+   
+        try:
+            ret = self.update(stats=stats,doc_ids=doc_id)
+        except Exception as e:
+            ret = None
+            print("the result")
+            print(e)
+            print("update insert is update")
+   
+
+        print("result")
+        print(ret)	
+        if ret:
+            return ret
+        print("next")
+        
+        
+        return self.insert(stats)
+
+    def remove(self,cond = None,doc_ids:int=None)->list:
+        print("[*****]remove")
+        if doc_ids is not None:
+            removed_ids = list(doc_ids)
+            
+            sql = f'delete from {self.db2name} where '
+            for doc_id in removed_ids:
+                sql+= f"id = '{doc_id}' and "
+            sql = sql[:-4]
+
+            try:
+                self.cur.execute(sql)
+                self.conn.commit()
+            except Exception as e:
+                print(e)
+                print("error subscription")
+                removed_ids = []
+
+            return removed_ids
+        
+        if cond is not None:
+            removed_ids = []
+            return []
+            
+        raise print("error from subscription error")
+
+
+#########################################################################
+#
 #	DB class that implements the TinyDB binding
 #
 #	This class may be moved later to an own module.
@@ -926,47 +1405,32 @@ class TinyDBBinding(object):
     # 	'actionsQuery',
     # 	'requestsQuery',
     # 	'schedulesQuery',
+  
+    # 	'conn',
+    # 	'cur',
+    # 	'path',
+    # 	'db2Statics'
+    # 	'db2'
     # )
     """ Define slots for instance variables. """
 
-    def __init__(self, path:str, postfix:str, conn) -> None:
+    def __init__(self, path:str, postfix:str,conn) -> None:
         """	Initialize the TinyDB binding.
         
             Args:
                 path: Path to the database directory.
                 postfix: Postfix for the database file names.
         """
-        self.cursor = conn.cursor()
-        self.conn = conn
-        self.cursor.execute("""
-        CREATE TABLE tabBatchNotifications (
-            id SERIAL PRIMARY KEY,
-            ri VARCHAR(255),
-            nu VARCHAR(255),
-            tstamp TIMESTAMP,
-            request JSONB
-            );
-        """)
-
-        self.cursor.execute("""
-            CREATE TABLE tabActions (
-            id SERIAL PRIMARY KEY,
-            ri VARCHAR(255),
-            subject VARCHAR(255),
-            apy INT,
-            evm INT,
-            evc JSONB,
-            ecp INT,
-            periodTS TIMESTAMP,
-            count INT
-            );
-        """)
-        self.path = path
-        """ Path to the database directory. """
+        
+        
         self._assignConfig()
+        self.conn = conn
+        self.cur = conn.cursor() ##path를 connection으로 수정
+        """ Path to the database directory. """
         """ Assign configuration values. """
         L.isInfo and L.log(f'Cache Size: {self.cacheSize:d}')
 
+        self.path = path
         # create transaction locks
         self.lockResources				= Lock()
         """ Lock for the resources table."""
@@ -1014,15 +1478,16 @@ class TinyDBBinding(object):
             """ The TinyDB database for the resources table."""
             self.dbIdentifiers 			= TinyDB(storage = MemoryStorage)
             """ The TinyDB database for the identifiers table."""
-            self.dbSubscriptions 		= TinyDB(storage = MemoryStorage)
+            self.db2Subscriptions 		= "subscriptions"
             """ The TinyDB database for the subscriptions table."""
             self.dbBatchNotifications	= TinyDB(storage = MemoryStorage)
             """ The TinyDB database for the batchNotifications table."""
-            self.dbStatistics			= TinyDB(storage = MemoryStorage)
+            self.db2Statistics 			= "statistics" 
             """ The TinyDB database for the statistics table."""
             self.dbActions				= TinyDB(storage = MemoryStorage)
             """ The TinyDB database for the actions table."""
-            self.dbRequests				= TinyDB(storage = MemoryStorage)
+            self.db2Requests			= "requests"
+            # self.dbRequests				= TinyDB(storage = MemoryStorage)
             """ The TinyDB database for the requests table."""
             self.dbSchedules			= TinyDB(storage = MemoryStorage)
             """ The TinyDB database for the schedules table."""
@@ -1032,15 +1497,16 @@ class TinyDBBinding(object):
             """ The TinyDB database for the resources table."""
             self.dbIdentifiers 			= TinyDB(self.fileIdentifiers, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
             """ The TinyDB database for the identifiers table."""
-            self.dbSubscriptions 		= TinyDB(self.fileSubscriptions, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
+            self.db2Subscriptions 		= "subscriptions"
             """ The TinyDB database for the subscriptions table."""
             self.dbBatchNotifications 	= TinyDB(self.fileBatchNotifications, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
             """ The TinyDB database for the batchNotifications table."""
-            self.dbStatistics 			= TinyDB(self.fileStatistics, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
+            self.db2Statistics 			= "statistics" 
             """ The TinyDB database for the statistics table."""
             self.dbActions	 			= TinyDB(self.fileActions, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
             """ The TinyDB database for the actions table."""
-            self.dbRequests	 			= TinyDB(self.fileRequests, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
+            self.db2Requests			= "requests"
+               # self.dbRequests	 			= TinyDB(self.fileRequests, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
             """ The TinyDB database for the requests table."""
             self.dbSchedules	 		= TinyDB(self.fileSchedules, storage = TinyDBBufferedStorage, write_delay = self.writeDelay)
             """ The TinyDB database for the schedules table."""
@@ -1063,25 +1529,26 @@ class TinyDBBinding(object):
         """ The TinyDB table for the structuredIDs table."""
         TinyDBBetterTable.assign(self.tabStructuredIDs)
         
-        self.tabSubscriptions = self.dbSubscriptions.table(_subscriptions, cache_size = self.cacheSize)
+        self.tabSubscriptions = Subscriptions(conn,self.db2Subscriptions)
         """ The TinyDB table for the subscriptions table."""
-        TinyDBBetterTable.assign(self.tabSubscriptions)
+        # TinyDBBetterTable.assign(self.tabSubscriptions)
         
         self.tabBatchNotifications = self.dbBatchNotifications.table(_batchNotifications, cache_size = self.cacheSize)
         """ The TinyDB table for the batchNotifications table."""
         TinyDBBetterTable.assign(self.tabBatchNotifications)
         
-        self.tabStatistics = self.dbStatistics.table(_statistics, cache_size = self.cacheSize)
+        self.tabStatistics = Statistics(conn,self.db2Statistics)
         """ The TinyDB table for the statistics table."""
-        TinyDBBetterTable.assign(self.tabStatistics)
+        # TinyDBBetterTable.assign(self.tabStatistics)
 
         self.tabActions = self.dbActions.table(_actions, cache_size = self.cacheSize)
         """ The TinyDB table for the actions table."""
         TinyDBBetterTable.assign(self.tabActions)
 
-        self.tabRequests = self.dbRequests.table(_requests, cache_size = self.cacheSize)
+        # self.tabRequests = self.dbRequests.table(_requests, cache_size = self.cacheSize)
+        self.tabRequests = Request(conn,self.db2Requests)
         """ The TinyDB table for the requests table."""
-        TinyDBBetterTable.assign(self.tabRequests)
+        # TinyDBBetterTable.assign(self.tabRequests)
 
         self.tabSchedules = self.dbSchedules.table(_schedules, cache_size = self.cacheSize)
         """ The TinyDB table for the schedules table."""
@@ -1100,11 +1567,53 @@ class TinyDBBinding(object):
         """ The TinyDB query object for the batchNotifications table."""
         self.actionsQuery				= Query()
         """ The TinyDB query object for the actions table."""
-        self.requestsQuery				= Query()
+        # self.requestsQuery				= Query()
         """ The TinyDB query object for the requests table."""
         self.schedulesQuery				= Query()
         """ The TinyDB query object for the schedules table."""
 
+        ## DB 생성
+        ## Schedules
+        self.cur.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS Schedules (
+                ri VARCHAR(150) NOT NULL UNIQUE,
+                pi VARCHAR(150) NOT NULL,
+                sce VARCHAR(150)[] NOT NULL,
+                nco BOOLEAN
+            );
+            """
+        )
+  
+        ## DB 생성
+        ## Schedules
+
+        self.cur.execute("""
+        CREATE TABLE tabBatchNotifications (
+            id SERIAL PRIMARY KEY,
+            ri VARCHAR(255),
+            nu VARCHAR(255),
+            tstamp TIMESTAMP,
+            request JSONB
+            );
+        """)
+
+        self.cur.execute("""
+            CREATE TABLE tabActions (
+            id SERIAL PRIMARY KEY,
+            ri VARCHAR(255),
+            subject VARCHAR(255),
+            apy INT,
+            evm INT,
+            evc JSONB,
+            ecp INT,
+            periodTS TIMESTAMP,
+            count INT
+            );
+        """)
+        self.conn.commit()
+        
+        
 
     def _assignConfig(self) -> None:
         """	Assign default configurations.
@@ -1498,7 +2007,7 @@ class TinyDBBinding(object):
         return []
 
     #
-    #	Subscriptions
+    #	Subscriptions[FIX]
     #
 
 
@@ -1520,7 +2029,8 @@ class TinyDBBinding(object):
                 _r:Document = self.tabSubscriptions.get(doc_id =  ri)	# type:ignore[arg-type, assignment]
                 return [_r] if _r else []
             if pi:
-                return self.tabSubscriptions.search(self.subscriptionQuery.pi == pi)
+                # return self.tabSubscriptions.search(self.subscriptionQuery.pi == pi)
+                return self.tabSubscriptions.search({'pi': pi})
             return None
 
 
@@ -1536,7 +2046,7 @@ class TinyDBBinding(object):
         with self.lockSubscriptions:
             ri = subscription.ri
             return self.tabSubscriptions.upsert(
-                Document({'ri'  	: ri, 
+                {'ri'  	: ri, 
                           'pi'  	: subscription.pi,
                           'nct' 	: subscription.nct,
                           'net' 	: subscription['enc/net'],	# TODO perhaps store enc as a whole?
@@ -1551,7 +2061,7 @@ class TinyDBBinding(object):
                           'org'		: subscription.getOriginator(),
                           'ma' 		: fromDuration(subscription.ma) if subscription.ma else None, # EXPERIMENTAL ma = maxAge
                           'nse' 	: subscription.nse
-                         }, ri)) is not None
+                         }) is not None
                     # self.subscriptionQuery.ri == ri) is not None
 
 
@@ -1570,19 +2080,39 @@ class TinyDBBinding(object):
 
 
     #
-    #	BatchNotifications
+    #	BatchNotifications[FIX]
     #
-    
-    def addBatchNotification(self, ri:str, nu:str, notificationRequest:dict) -> bool:
+
+    def addBatchNotification(self, ri:str, nu:str, notificationRequest:JSON) -> bool:
+        """	Add a batch notification to the database.
+
+            Args:
+                ri: The resource ID of the resource.
+                nu: The notification URI.
+                notificationRequest: The notification request.
+
+            Return:
+                True if the batch notification was added, False otherwise.
+        """
         with self.lockBatchNotifications:
-            self.cursor.execute("""
+            self.cur.execute("""
                 INSERT INTO tabBatchNotifications (ri, nu, tstamp, request)
                 VALUES (%s, %s, NOW(), %s)
                 """, (ri, nu, Json(notificationRequest)))
             self.conn.commit()
         return self.cursor.rowcount > 0
 
+
     def countBatchNotifications(self, ri:str, nu:str) -> int:
+        """	Return the number of batch notifications for a resource and notification URI.
+
+            Args:
+                ri: The resource ID of the resource.
+                nu: The notification URI.
+
+            Return:
+                The number of batch notifications for the resource and notification URI.
+        """
         with self.lockBatchNotifications:
             self.cursor.execute("""
                 SELECT COUNT(*)
@@ -1593,7 +2123,16 @@ class TinyDBBinding(object):
         return count
 
 
-    def getBatchNotifications(self, ri:str, nu:str) -> list:
+    def getBatchNotifications(self, ri:str, nu:str) -> list[Document]:
+        """	Return the batch notifications for a resource and notification URI.
+
+            Args:
+                ri: The resource ID of the resource.
+                nu: The notification URI.
+
+            Return:
+                A list of batch notifications for the resource and notification URI.
+        """
         with self.lockBatchNotifications:
             self.cursor.execute("""
                 SELECT *
@@ -1605,6 +2144,15 @@ class TinyDBBinding(object):
 
 
     def removeBatchNotifications(self, ri:str, nu:str) -> bool:
+        """	Remove the batch notifications for a resource and notification URI.
+
+            Args:
+                ri: The resource ID of the resource.
+                nu: The notification URI.
+
+            Return:
+                True if the batch notifications were removed, False otherwise.
+        """
         with self.lockBatchNotifications:
             self.cursor.execute("""
                 DELETE FROM tabBatchNotifications
@@ -1613,8 +2161,9 @@ class TinyDBBinding(object):
             self.conn.commit()
         return self.cursor.rowcount > 0
 
+
     #
-    #	Statistics
+    #	Statistics[FIX]
     #
 
     def searchStatistics(self) -> JSON:
@@ -1640,7 +2189,8 @@ class TinyDBBinding(object):
                 True if the statistics were updated or inserted, False otherwise.
         """
         with self.lockStatistics:
-            if len(self.tabStatistics) > 0:
+            # if len(self.tabStatistics) > 0:
+            if len(self.tabStatistics.all()) > 0:
                 doc_id = self.tabStatistics.all()[0].doc_id
                 #return self.tabStatistics.update(stats, doc_ids = [1]) is not None
                 return self.tabStatistics.update(stats, doc_ids = [doc_id]) is not None
@@ -1656,91 +2206,104 @@ class TinyDBBinding(object):
 
 
     #
-    #	Actions
+    #	Actions[FIX]
     #
 
-
-    def searchActionReprs(self) -> list:
+    def searchActionReprs(self) -> list[Document]:
+        """	Search for action representations.
+        
+            Return:
+                A list of action representations, or None if not found.
+        """
         with self.lockActions:
-            self.cursor.execute("SELECT * FROM tabActions")
-            actions = self.cursor.fetchall()
-        return actions if actions else None
+            actions = self.tabActions.all()
+            return actions if actions else None
     
 
-    def getAction(self, ri:str) -> dict:
+    def getAction(self, ri:str) -> Optional[Document]:
+        """	Get an action representation by resource ID.
+        
+            Args:
+                ri: The resource ID of the action representation.
+            
+            Return:
+                The action representation, or None if not found.
+        """
         with self.lockActions:
-            self.cursor.execute("SELECT * FROM tabActions WHERE ri = %s", (ri,))
-            action = self.cursor.fetchone()
-        return action
+            return self.tabActions.get(doc_id = ri)	# type:ignore[arg-type, return-value]
 
 
-    def searchActionsDeprsForSubject(self, subject:str) -> list:
+    def searchActionsDeprsForSubject(self, ri:str) -> Sequence[JSON]:
+        """	Search for action representations by subject.
+        
+            Args:
+                ri: The resource ID of the action representation's subject.
+            
+            Return:
+                A list of action representations, or None if not found.
+        """
         with self.lockActions:
-            self.cursor.execute("SELECT * FROM tabActions WHERE subject = %s", (subject,))
-            actions = self.cursor.fetchall()
-        return actions
+            return self.tabActions.search(self.actionsQuery.subject == ri)
     
 
     def upsertActionRepr(self, action:ACTR, periodTS:float, count:int) -> bool:
+        """	Update or insert an action representation.
+        
+            Args:
+                action: The action representation to update or insert.
+                periodTS: The timestamp for periodic execution.
+                count: The number of times the action will be executed.
+            
+            Return:
+                True if the action representation was updated or inserted, False otherwise.
+        """
         with self.lockActions:
-            try:
-                # action 객체의 속성 추출
-                _ri = action.ri
-                _subject = action.sri if action.sri else action.pi
-                _dep = action.dep
-                _apy = action.apy
-                _evm = action.evm
-                _evc = action.evc
-                _ecp = action.ecp
+            _ri = action.ri
+            _sri = action.sri
+            return self.tabActions.upsert(Document(
+                    {	'ri':		_ri,
+                        'subject':	_sri if _sri else action.pi,
+                        'dep':		action.dep,
+                        'apy':		action.apy,
+                        'evm':		action.evm,
+                        'evc':		action.evc,	
+                        'ecp':		action.ecp,
+                        'periodTS': periodTS,
+                        'count':	count,
+                    }, _ri)) is not None
 
-                # PostgreSQL 쿼리 실행
-                self.cursor.execute("""
-                    INSERT INTO tabActions (ri, subject, dep, apy, evm, evc, ecp, periodTS, count)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    ON CONFLICT (ri) DO UPDATE SET
-                    subject = EXCLUDED.subject,
-                    dep = EXCLUDED.dep,
-                    apy = EXCLUDED.apy,
-                    evm = EXCLUDED.evm,
-                    evc = EXCLUDED.evc,
-                    ecp = EXCLUDED.ecp,
-                    periodTS = EXCLUDED.periodTS,
-                    count = EXCLUDED.count
-                """, (_ri, _subject, _dep, _apy, _evm, _evc, _ecp, periodTS, count))
-                self.conn.commit()
-                return self.cursor.rowcount > 0
-            except Exception as e:
-                print(f"upsertActionRepr 함수 오류: {e}")
-                return False
 
-    def updateActionRepr(self, action:dict) -> bool:
+    def updateActionRepr(self, actionRepr:JSON) -> bool:
+        """	Update an action representation.
+        
+            Args:
+                actionRepr: The action representation to update.
+            
+            Return:
+                True if the action representation was updated, False otherwise.
+        """
         with self.lockActions:
-            self.cursor.execute("""
-                UPDATE tabActions SET
-                subject = %s,
-                apy = %s,
-                evm = %s,
-                evc = %s,
-                ecp = %s,
-                periodTS = %s,
-                count = %s
-                WHERE ri = %s
-            """, (action.get('subject'), action.get('apy'), action.get('evm'),
-                Json(action.get('evc')), action.get('ecp'), action.get('periodTS'), 
-                action.get('count'), action['ri']))
-            self.conn.commit()
-        return self.cursor.rowcount > 0
+            return self.tabActions.update(actionRepr, doc_ids = [actionRepr['ri']]) is not None	# type:ignore[arg-type]
 
 
     def removeActionRepr(self, ri:str) -> bool:
+        """	Remove an action representation.
+
+            Args:
+                ri: The action's resource ID.
+            
+            Return:
+                True if the action representation was removed, False otherwise.
+        """
         with self.lockActions:
-            self.cursor.execute("DELETE FROM tabActions WHERE ri = %s", (ri,))
-            self.conn.commit()
-        return self.cursor.rowcount > 0
+            if self.tabActions.get(doc_id = ri):	# type:ignore[arg-type]
+                return len(self.tabActions.remove(doc_ids = [ri])) > 0	# type:ignore[arg-type, list-item]
+            return False
+            # return len(self.tabActions.remove(self.actionsQuery.ri == ri)) > 0
 
 
     #
-    #	Requests
+    #	Requests[FIX]
     #
 
     def insertRequest(self, op:Operation, 
@@ -1779,7 +2342,7 @@ class TinyDBBinding(object):
 
                 #op = request.get('op') if 'op' in request else Operation.NA
                 rsc = response['rsc'] if 'rsc' in response else ResponseStatusCode.UNKNOWN
-
+                
                 # The following removes all None values from the request and response, and the requests structure
                 _doc = {'ri': ri,
                          'srn': srn,
@@ -1792,9 +2355,10 @@ class TinyDBBinding(object):
                          'req': { k: v for k, v in request.items() if v is not None }, 
                          'rsp': { k: v for k, v in response.items() if v is not None }
                        }
-                self.tabRequests.insert(
-                    Document({k: v for k, v in _doc.items() if v is not None}, 
-                             self.tabRequests.document_id_class(ts)))	# type:ignore[arg-type]
+                self.tabRequests.insert(_doc)	# type:ignore[arg-type]
+                # self.tabRequests.insert(
+                # 	Document({k: v for k, v in _doc.items() if v is not None}, 
+                # 			 self.tabRequests.document_id_class(ts)))	# type:ignore[arg-type]
 
             except Exception as e:
                 L.logErr(f'Exception inserting request/response for ri: {ri}', exc = e)
@@ -1814,7 +2378,7 @@ class TinyDBBinding(object):
         with self.lockRequests:
             if not ri:
                 return self.tabRequests.all()
-            return self.tabRequests.search(self.requestsQuery.ri == ri)
+            return self.tabRequests.search(ri)
 
 
     def deleteRequests(self, ri:Optional[str] = None) -> None:
@@ -1825,78 +2389,50 @@ class TinyDBBinding(object):
         """
         if ri:
             with self.lockRequests:
-                self.tabRequests.remove(self.requestsQuery.ri == ri)
+                self.tabRequests.remove(ri)
         else:
             with self.lockRequests:
                 self.tabRequests.truncate()
 
     #
-    #	Schedules
+    #	Schedules[FIX]
     #
 
-    def getSchedules(self) -> list[Document]:
-        """	Get all schedules from the database.
-        
-            Return:
-                List of *Documents*. May be empty.
-        """
+    def getSchedules(self) -> list[dict]:
         with self.lockSchedules:
-            return self.tabSchedules.all()
+            self.cur.execute("SELECT * FROM Schedules;")
+            rows = self.cur.fetchall()
+            result = [{"ri": row[0], "pi": row[1], "sce": row[2]} for row in rows]
+            return result
 
-
-    def getSchedule(self, ri:str) -> Optional[Document]:
-        """	Get a schedule from the database.
-        
-            Args:
-                ri: The resource ID of the schedule.
-
-            Return:
-                The schedule, or *None* if not found.
-        """
+    def getSchedule(self, ri: str) -> Optional[dict]:
         with self.lockSchedules:
-            return self.tabSchedules.get(doc_id = ri)	# type:ignore[arg-type, return-value]
-    
+            self.cur.execute("SELECT * FROM Schedules WHERE ri = %s;", (ri,))
+            row = self.cur.fetchone()
+            result = {"ri": row[0], "pi": row[1], "sce": row[2]} if row else None
+            self.db_close()
+            return result
 
-    def searchSchedules(self, pi:str) -> list[Document]:
-        """	Search for schedules in the database.
-        
-            Args:
-                pi: The resource ID of the parent resource.
-            
-            Return:
-                List of *Documents*. May be empty.
-        """
+    def searchSchedules(self, pi: str) -> list[dict]:
         with self.lockSchedules:
-            return self.tabSchedules.search(self.schedulesQuery.pi == pi)
-    
+            self.cur.execute("SELECT * FROM Schedules WHERE pi = %s;", (pi,))
+            rows = self.cur.fetchall()
+            result = [{"ri": row[0], "pi": row[1], "sce": row[2]} for row in rows]
+            return result
 
-    def upsertSchedule(self, ri:str, pi:str, schedule:list[str]) -> bool:
-        """	Add or update a schedule in the database.
-        
-            Args:
-                ri: The resource ID of the schedule.
-                pi: The resource ID of the schedule's parent resource.
-                schedule: The schedule to store.
-            
-            Return:
-                True if the schedule was added or updated, False otherwise.
-        """
+    def upsertSchedule(self, ri: str, pi: str, sce: list[str]) -> bool:
         with self.lockSchedules:
-            return self.tabSchedules.upsert(Document(
-                        { 'ri': ri,
-                          'pi': pi,
-                          'sce': schedule }, 
-                        ri)) is not None	# type:ignore[arg-type]
+            try:
+                self.cur.execute("INSERT INTO Schedules (ri, pi, sce) VALUES (%s, %s, %s) ON CONFLICT (ri) DO UPDATE SET pi = EXCLUDED.pi, sce = EXCLUDED.sce;", (ri, pi, sce))
+                self.conn.commit()
+                return True
+            except Exception as e:
+                self.conn.rollback()
+                return False
 
-
-    def removeSchedule(self, ri:str) -> bool:
-        """	Remove a schedule from the database.
-        
-            Args:
-                ri: The resource ID of the schedule to remove.
-
-            Return:
-                True if the schedule was removed, False otherwise.
-        """
+    def removeSchedule(self, ri: str) -> bool:
         with self.lockSchedules:
-            return len(self.tabSchedules.remove(doc_ids = [ri])) > 0	# type:ignore[arg-type, list-item]
+            self.cur.execute("DELETE FROM Schedules WHERE ri = %s;", (ri,))
+            affected_rows = self.cur.rowcount
+            self.conn.commit()
+            return affected_rows > 0

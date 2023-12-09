@@ -61,6 +61,8 @@ plotext==5.2.8
     #   textual-plotext
 prompt-toolkit==3.0.39
     # via inquirerpy
+psycopg2-binary==2.9.9
+    # via grep postgresql data
 pygments==2.16.1
     # via rich
 pyparsing==3.1.1
@@ -101,3 +103,4 @@ werkzeug==3.0.1
     # via flask
 zipp==3.17.0
     # via importlib-metadata
+
